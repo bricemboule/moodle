@@ -1,0 +1,261 @@
+[12-Jan-2026 08:06:53 Europe/London] Default exception handler: Exception : Class "core_course_renderer" not found Debug: 
+Error code: generalexceptionmessage
+* line 26 of /theme/spacechild/renderers.php: Error thrown
+* line 543 of /lib/classes/output/theme_config.php: call to include_once()
+* line 451 of /lib/classes/output/theme_config.php: call to core\output\theme_config->__construct()
+* line 1861 of /lib/pagelib.php: call to core\output\theme_config::load()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[12-Jan-2026 08:13:21 Europe/London] Default exception handler: Exception : Class "core_course_renderer" not found Debug: 
+Error code: generalexceptionmessage
+* line 26 of /theme/spacechild/renderers.php: Error thrown
+* line 543 of /lib/classes/output/theme_config.php: call to include_once()
+* line 451 of /lib/classes/output/theme_config.php: call to core\output\theme_config->__construct()
+* line 1861 of /lib/pagelib.php: call to core\output\theme_config::load()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[12-Jan-2026 08:13:41 Europe/London] Default exception handler: Exception : Class "core_course_renderer" not found Debug: 
+Error code: generalexceptionmessage
+* line 26 of /theme/spacechild/renderers.php: Error thrown
+* line 543 of /lib/classes/output/theme_config.php: call to include_once()
+* line 451 of /lib/classes/output/theme_config.php: call to core\output\theme_config->__construct()
+* line 1861 of /lib/pagelib.php: call to core\output\theme_config::load()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[12-Jan-2026 08:21:01 Europe/London] Default exception handler: Exception : Call to undefined method core_course_category::is_visible() Debug: 
+Error code: generalexceptionmessage
+* line 110 of /theme/spacechild/classes/output/core/course/renderer.php: Error thrown
+* line 54 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->get_frontpage_categories()
+* line 40 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->guest_frontpage()
+* line 141 of /index.php: call to theme_spacechild\output\core\course\renderer->frontpage()
+
+[12-Jan-2026 08:21:16 Europe/London] Default exception handler: Exception : Call to undefined method core_course_category::is_visible() Debug: 
+Error code: generalexceptionmessage
+* line 110 of /theme/spacechild/classes/output/core/course/renderer.php: Error thrown
+* line 54 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->get_frontpage_categories()
+* line 40 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->guest_frontpage()
+* line 141 of /index.php: call to theme_spacechild\output\core\course\renderer->frontpage()
+
+[12-Jan-2026 08:21:34 Europe/London] Default exception handler: Exception : Call to undefined method core_course_category::is_visible() Debug: 
+Error code: generalexceptionmessage
+* line 110 of /theme/spacechild/classes/output/core/course/renderer.php: Error thrown
+* line 54 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->get_frontpage_categories()
+* line 40 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->guest_frontpage()
+* line 141 of /index.php: call to theme_spacechild\output\core\course\renderer->frontpage()
+
+[12-Jan-2026 08:22:13 Europe/London] Default exception handler: Exception : Call to undefined method core_course_category::is_visible() Debug: 
+Error code: generalexceptionmessage
+* line 110 of /theme/spacechild/classes/output/core/course/renderer.php: Error thrown
+* line 54 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->get_frontpage_categories()
+* line 40 of /theme/spacechild/classes/output/core/course/renderer.php: call to theme_spacechild\output\core\course\renderer->guest_frontpage()
+* line 141 of /index.php: call to theme_spacechild\output\core\course\renderer->frontpage()
+
+[13-Jan-2026 02:39:06 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$context" Debug: 
+Error code: generalexceptionmessage
+* line 2624 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 02:39:09 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$context" Debug: 
+Error code: generalexceptionmessage
+* line 2624 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 02:39:14 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$context" Debug: 
+Error code: generalexceptionmessage
+* line 2624 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 02:43:25 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 02:43:36 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:08:10 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:08:16 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:08:17 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:09:30 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:09:37 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:09:40 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:10:06 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:10:09 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[13-Jan-2026 05:10:11 Europe/London] Default exception handler: Exception : syntax error, unexpected variable "$theme" Debug: 
+Error code: generalexceptionmessage
+* line 2647 of /theme/spacechild/classes/output/core_renderer.php: ParseError thrown
+* line ? of unknownfile: call to core\component::classloader()
+* line 81 of /lib/classes/output/renderer_factory/theme_overridden_renderer_factory.php: call to class_exists()
+* line 2167 of /lib/classes/output/theme_config.php: call to core\output\renderer_factory\theme_overridden_renderer_factory->get_renderer()
+* line 1009 of /lib/pagelib.php: call to core\output\theme_config->get_renderer()
+* line 1874 of /lib/pagelib.php: call to moodle_page->get_renderer()
+* line 761 of /lib/pagelib.php: call to moodle_page->initialise_theme_and_output()
+* line 1009 of /lib/pagelib.php: call to moodle_page->magic_get_theme()
+* line 112 of /index.php: call to moodle_page->get_renderer()
+
+[18-Jan-2026 11:35:03 Europe/London] Default exception handler: Sorry, you may not use this page. Debug: 
+Error code: notlocalisederrormessage
+* line 33 of /login/signup.php: core\exception\moodle_exception thrown
+
+[18-Jan-2026 11:55:40 Europe/London] PHP Warning:  Undefined variable $businessurl in /var/www/html/moodle/local/spacechildpages/universities.php on line 53
+[18-Jan-2026 11:55:40 Europe/London] Default exception handler: Exception : Call to a member function out() on null Debug: 
+Error code: generalexceptionmessage
+* line 53 of /local/spacechildpages/universities.php: Error thrown
+
+[18-Jan-2026 11:55:47 Europe/London] PHP Warning:  Undefined variable $businessurl in /var/www/html/moodle/local/spacechildpages/governments.php on line 53
+[18-Jan-2026 11:55:47 Europe/London] Default exception handler: Exception : Call to a member function out() on null Debug: 
+Error code: generalexceptionmessage
+* line 53 of /local/spacechildpages/governments.php: Error thrown
+
+[18-Jan-2026 11:55:55 Europe/London] PHP Warning:  Undefined variable $businessurl in /var/www/html/moodle/local/spacechildpages/universities.php on line 53
+[18-Jan-2026 11:55:55 Europe/London] Default exception handler: Exception : Call to a member function out() on null Debug: 
+Error code: generalexceptionmessage
+* line 53 of /local/spacechildpages/universities.php: Error thrown
+
+[18-Jan-2026 11:56:57 Europe/London] PHP Warning:  Undefined variable $businessurl in /var/www/html/moodle/local/spacechildpages/universities.php on line 52
+[18-Jan-2026 11:56:57 Europe/London] Default exception handler: Exception : Call to a member function out() on null Debug: 
+Error code: generalexceptionmessage
+* line 52 of /local/spacechildpages/universities.php: Error thrown
+
+[18-Jan-2026 11:57:11 Europe/London] PHP Warning:  Undefined variable $businessurl in /var/www/html/moodle/local/spacechildpages/universities.php on line 52
+[18-Jan-2026 11:57:11 Europe/London] Default exception handler: Exception : Call to a member function out() on null Debug: 
+Error code: generalexceptionmessage
+* line 52 of /local/spacechildpages/universities.php: Error thrown
+
+[18-Jan-2026 15:35:40 Europe/London] PHP Warning:  file_get_contents(/var/www/html/moodle/theme/spacechild/scss/editor.scss): Failed to open stream: No such file or directory in /var/www/html/moodle/lib/classes/scss.php on line 95
+[18-Jan-2026 15:35:40 UTC] PHP Deprecated:  fwrite(): Passing null to parameter #2 ($data) of type string is deprecated in /var/www/html/moodle/lib/editor/tiny/loader.php on line 234
+[18-Jan-2026 16:16:36 Europe/London] Default exception handler: Sorry, you may not use this page. Debug: 
+Error code: notlocalisederrormessage
+* line 33 of /login/signup.php: core\exception\moodle_exception thrown
+

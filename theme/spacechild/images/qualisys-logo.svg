@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-label="Qualisys Consulting QC">
+  <rect width="520" height="120" fill="none" />
+  <text x="10" y="82" font-family="Arial, sans-serif" font-size="96" font-weight="700" fill="#B53A3D">Q</text>
+  <text x="90" y="80" font-family="Arial, sans-serif" font-size="72" font-weight="600" fill="#297664">ualisys</text>
+  <text x="330" y="82" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#297664">Consulting</text>
+  <rect x="455" y="52" width="40" height="32" rx="4" fill="#B53A3D" />
+  <text x="462" y="75" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Qc</text>
+</svg>

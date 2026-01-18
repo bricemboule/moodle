@@ -1,0 +1,35 @@
+<div class="sc-topbar">
+  <div class="sc-container sc-topbar-inner">
+    <span class="sc-topbar-label">Publics :</span>
+    <a href="{{peopleurl}}">Pour les personnes</a>
+    <a href="{{universitiesurl}}">Pour les universités</a>
+    <a href="{{governmentsurl}}">Pour les gouvernements</a>
+  </div>
+</div>
+
+<header class="sc-nav">
+  <div class="sc-container sc-nav-inner">
+    <a class="sc-logo" href="{{wwwroot}}">
+      <img class="sc-logo-image" src="{{wwwroot}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
+    </a>
+
+    <a class="sc-nav-link" href="{{wwwroot}}/course/index.php">Explorer</a>
+
+    <form class="sc-nav-search" method="get" action="{{wwwroot}}/course/search.php" role="search">
+      <label class="sc-visually-hidden" for="sc-nav-search">Que souhaiterez-vous apprendre ?</label>
+      <input
+        id="sc-nav-search"
+        type="text"
+        name="search"
+        placeholder="Que souhaiterez-vous apprendre ?"
+        aria-label="Que souhaiterez-vous apprendre ?"
+      >
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <nav class="sc-nav-actions">
+      <a class="sc-link" href="{{loginurl}}">Connexion</a>
+      <a class="sc-btn sc-btn--primary" href="{{signupurl}}">Inscription gratuite</a>
+    </nav>
+  </div>
+</header>

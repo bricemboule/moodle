@@ -1,0 +1,53 @@
+.cs-landing {
+  --cs-primary: #2f7d32;
+  --cs-primary-strong: #1f5a23;
+  --cs-accent: #7a1f2b;
+  --cs-accent-strong: #5b1420;
+  --cs-hero-gradient: linear-gradient(180deg, rgba(47,125,50,.14) 0%, rgba(122,31,43,.06) 55%, #ffffff 80%);
+  --cs-ring: 0 0 0 3px rgba(47,125,50,.18);
+}
+
+.cs-nav__link:hover { color: var(--cs-accent); }
+
+.cs-btn {
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.cs-btn--primary {
+  background: var(--cs-primary);
+  border-color: transparent;
+}
+.cs-btn--primary:hover {
+  background: var(--cs-primary-strong);
+  box-shadow: var(--cs-ring);
+}
+
+.cs-hero { background: var(--cs-hero-gradient); }
+
+.cs-search:focus-within {
+  box-shadow: var(--cs-ring), var(--cs-shadow);
+}
+
+.cs-visual-card--alt {
+  background: linear-gradient(135deg, var(--cs-accent), var(--cs-primary));
+  color: #fff;
+}
+
+.cs-visual-card__badge {
+  background: rgba(47,125,50,.14);
+  color: var(--cs-primary);
+}
+
+.cs-link { color: var(--cs-accent); }
+.cs-link:hover { color: var(--cs-accent-strong); }
+
+.cs-course__thumbInner {
+  background: linear-gradient(135deg, rgba(47,125,50,.25), rgba(122,31,43,.18));
+}
+
+.cs-cta__box {
+  background: linear-gradient(135deg, var(--cs-accent), var(--cs-primary));
+  color: #fff;
+}
+
+.cs-topstrip { background: var(--cs-accent); }

@@ -1,0 +1,28 @@
+<div class="sc-topbar">
+  <div class="sc-container">
+    <div class="sc-topbar-links">
+      <a href="{{peopleurl}}">Pour les personnes</a>
+      <a href="{{universitiesurl}}">Pour les universités</a>
+      <a href="{{governmentsurl}}">Pour les gouvernements</a>
+    </div>
+  </div>
+</div>
+
+<header class="sc-nav">
+  <div class="sc-container sc-nav-inner">
+    <a class="sc-logo" href="{{wwwroot}}">
+      <span class="sc-logo-mark">S</span>
+      <span class="sc-logo-text">{{sitename}}</span>
+    </a>
+
+    <form class="sc-search" method="get" action="{{wwwroot}}/course/search.php">
+      <input type="text" name="search" placeholder="Que souhaitez-vous apprendre ?" aria-label="Que souhaiterez-vous apprendre ?">
+      <button type="submit" aria-label="Rechercher">🔍</button>
+    </form>
+
+    <nav class="sc-nav-actions">
+      <a class="sc-link" href="{{loginurl}}">Connexion</a>
+      <a class="sc-btn" href="{{signupurl}}">Inscrivez-vous gratuitement</a>
+    </nav>
+  </div>
+</header>

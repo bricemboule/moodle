@@ -1,0 +1,323 @@
+{{> theme_spacechild/spacechild/marketing_header_coursera }}
+
+<main class="sc-landing sc-landing--coursera">
+  <section class="sc-hero">
+    <div class="sc-container sc-hero-grid">
+      <div class="sc-hero-copy sc-animate">
+        <div class="sc-eyebrow">Apprendre sans limites</div>
+        <h1>Des compétences professionnelles, à votre rythme.</h1>
+        <p>
+          Cours, certificats et programmes conçus avec des organisations de premier plan.
+          Progressez avec des parcours clairs et des projets concrets sur {{sitename}}.
+        </p>
+        <div class="sc-hero-actions">
+          <a class="sc-btn sc-btn--primary" href="{{signupurl}}">Inscription gratuite</a>
+          <a class="sc-btn sc-btn--secondary" href="{{wwwroot}}/course/index.php">Explorer le catalogue</a>
+        </div>
+        <form class="sc-hero-search" method="get" action="{{wwwroot}}/course/search.php">
+          <label class="sc-visually-hidden" for="sc-hero-search">Rechercher un cours</label>
+          <input
+            id="sc-hero-search"
+            type="text"
+            name="search"
+            placeholder="Rechercher des cours, compétences, domaines"
+            aria-label="Rechercher un cours"
+          >
+          <button type="submit">Rechercher</button>
+        </form>
+        <div class="sc-hero-tags">
+          <span>Certificats professionnels</span>
+          <span>Projets guidés</span>
+          <span>Diplômes en ligne</span>
+        </div>
+      </div>
+
+      <div class="sc-hero-panel sc-animate">
+        {{#featuredprogram}}
+        <div class="sc-feature-card">
+          <div class="sc-card-tag">{{tag}}</div>
+          <h3>{{title}}</h3>
+          <p>{{summary}}</p>
+          <div class="sc-feature-meta">
+            <span>{{duration}}</span>
+            <span>{{level}}</span>
+            <span>{{projects}}</span>
+          </div>
+          <a class="sc-link" href="{{url}}">{{cta}} -></a>
+        </div>
+        {{/featuredprogram}}
+        <div class="sc-feature-list">
+          <div class="sc-feature-item">100% en ligne</div>
+          <div class="sc-feature-item">Accès illimité</div>
+          <div class="sc-feature-item">Certificats partageables</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-container">
+      <div class="sc-logos sc-animate">
+        <div class="sc-logos-title">Apprendre auprès d'organisations de premier plan</div>
+        <div class="sc-logos-row">
+          <span class="sc-logo-pill">Google</span>
+          <span class="sc-logo-pill">IBM</span>
+          <span class="sc-logo-pill">Microsoft</span>
+          <span class="sc-logo-pill">Meta</span>
+          <span class="sc-logo-pill">Stanford</span>
+          <span class="sc-logo-pill">UN</span>
+          <span class="sc-logo-pill">AI Lab</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{#hasgoals}}
+  <section class="sc-section sc-section--soft">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2>Commencez avec un objectif</h2>
+        <p class="sc-section-sub">Des parcours recommandés pour accélérer votre progression.</p>
+      </div>
+      <div class="sc-grid sc-grid--goals sc-stagger">
+        {{#goals}}
+          <a class="sc-goal-card" href="{{url}}">
+            <div class="sc-goal-label">{{label}}</div>
+            <h3>{{title}}</h3>
+            <p>{{text}}</p>
+            <span class="sc-goal-cta">{{cta}} -></span>
+          </a>
+        {{/goals}}
+      </div>
+    </div>
+  </section>
+  {{/hasgoals}}
+
+  {{#hascategories}}
+  <section class="sc-section">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2>Explorer par catégorie</h2>
+        <a class="sc-link" href="{{wwwroot}}/course/index.php">Tout voir -></a>
+      </div>
+      <div class="sc-grid sc-grid--categories sc-stagger">
+        {{#categories}}
+          <a class="sc-category" href="{{url}}">
+            {{#image}}
+              <div class="sc-category-media">
+                <img src="{{image}}" alt="{{name}}" loading="lazy">
+              </div>
+            {{/image}}
+            <div class="sc-category-title">{{name}}</div>
+            <div class="sc-category-meta">{{meta}}</div>
+          </a>
+        {{/categories}}
+      </div>
+    </div>
+  </section>
+  {{/hascategories}}
+
+  {{#hasprograms}}
+  <section class="sc-section sc-section--alt">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2>Certificats professionnels populaires</h2>
+        <p class="sc-section-sub">Des programmes intensifs conçus avec des partenaires reconnus.</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#programs}}
+          <article class="sc-card sc-card--program">
+            <div class="sc-card-tag">{{tag}}</div>
+            <h3>{{title}}</h3>
+            <p>{{summary}}</p>
+            <div class="sc-card-meta">Avec {{partner}} | {{duration}} | {{level}} | {{projects}}</div>
+            <a href="{{url}}">{{cta}} -></a>
+          </article>
+        {{/programs}}
+      </div>
+    </div>
+  </section>
+  {{/hasprograms}}
+
+  <section class="sc-business">
+    <div class="sc-container sc-business-inner">
+      <div>
+        <div class="sc-business-tag">Pour les entreprises</div>
+        <h2>Accélérez la montée en compétences de vos équipes</h2>
+        <p>Parcours par rôle, reporting, et accompagnement dédié.</p>
+      </div>
+      <div class="sc-business-actions">
+        <a class="sc-btn sc-btn--primary" href="{{businessurl}}">Voir les offres</a>
+        <a class="sc-btn sc-btn--secondary" href="{{businessurl}}#contact">Demander une demo</a>
+      </div>
+    </div>
+  </section>
+
+  {{#hascourses}}
+  <section class="sc-section">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2>Cours populaires en ce moment</h2>
+        <a class="sc-link" href="{{wwwroot}}/course/search.php">Voir tout -></a>
+      </div>
+
+      <div class="sc-grid sc-grid--courses sc-stagger">
+        {{#courses}}
+          <article class="sc-card sc-card--course">
+            {{#image}}
+              <div class="sc-card-media">
+                <img src="{{image}}" alt="{{title}}" loading="lazy">
+              </div>
+            {{/image}}
+            <div class="sc-card-provider">{{provider}}</div>
+            <h3>{{title}}</h3>
+            <p>{{summary}}</p>
+            <div class="sc-card-meta">
+              <span>Note {{rating}}</span>
+              <span>{{reviews}} avis</span>
+              <span>{{meta}}</span>
+            </div>
+            <a href="{{url}}">{{cta}} -></a>
+          </article>
+        {{/courses}}
+      </div>
+    </div>
+  </section>
+  {{/hascourses}}
+
+  <section class="sc-section sc-section--soft">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2>Pourquoi choisir {{sitename}} ?</h2>
+        <p class="sc-section-sub">Une expérience d'apprentissage inspirée des meilleures plateformes.</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        <article class="sc-card sc-card--feature">
+          <div class="sc-card-tag">Expertise</div>
+          <h3>Formateurs experts</h3>
+          <p>Contenus créés par des praticiens du terrain.</p>
+        </article>
+        <article class="sc-card sc-card--feature">
+          <div class="sc-card-tag">Pratique</div>
+          <h3>Projets concrets</h3>
+          <p>Apprenez en faisant avec des cas réels.</p>
+        </article>
+        <article class="sc-card sc-card--feature">
+          <div class="sc-card-tag">Flexibilité</div>
+          <h3>Apprendre à votre rythme</h3>
+          <p>Accès 24/7 sur mobile ou desktop.</p>
+        </article>
+        <article class="sc-card sc-card--feature">
+          <div class="sc-card-tag">Reconnaissance</div>
+          <h3>Certificats partageables</h3>
+          <p>Badges et attestations pour valoriser vos acquis.</p>
+        </article>
+      </div>
+
+      <div class="sc-formats sc-stagger">
+        <div class="sc-format">
+          <div class="sc-format-title">Cours courts</div>
+          <div class="sc-format-text">Leçons de 5-10 min, faciles à suivre.</div>
+        </div>
+        <div class="sc-format">
+          <div class="sc-format-title">Labs interactifs</div>
+          <div class="sc-format-text">Exercices guidés et quiz immédiats.</div>
+        </div>
+        <div class="sc-format">
+          <div class="sc-format-title">Projets encadrés</div>
+          <div class="sc-format-text">Briefs réels, portfolio et feedback.</div>
+        </div>
+        <div class="sc-format">
+          <div class="sc-format-title">Certificats</div>
+          <div class="sc-format-text">Validation officielle en fin de parcours.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{#haskpis}}
+  <section class="sc-section">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2>Résultats des apprenants</h2>
+        <p class="sc-section-sub">Des indicateurs clairs pour mesurer l'impact.</p>
+      </div>
+      <div class="sc-kpis sc-stagger">
+        {{#kpis}}
+          <div class="sc-kpi">
+            <div class="sc-kpi-value">{{value}}</div>
+            <div class="sc-kpi-label">{{label}}</div>
+          </div>
+        {{/kpis}}
+      </div>
+    </div>
+  </section>
+  {{/haskpis}}
+
+  {{#hassteps}}
+  <section class="sc-section sc-section--alt">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2>Comment ça marche</h2>
+        <p class="sc-section-sub">Une méthode simple pour avancer rapidement.</p>
+      </div>
+      <div class="sc-steps sc-stagger">
+        {{#steps}}
+          <div class="sc-step">
+            <div class="sc-step-number">{{number}}</div>
+            <h3>{{title}}</h3>
+            <p>{{text}}</p>
+          </div>
+        {{/steps}}
+      </div>
+    </div>
+  </section>
+  {{/hassteps}}
+
+  {{#hastestimonials}}
+  <section class="sc-section">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2>Ils parlent de leur progression</h2>
+      </div>
+      <div class="sc-grid sc-grid--testimonials sc-stagger">
+        {{#testimonials}}
+          <article class="sc-card sc-card--testimonial">
+            <p>"{{quote}}"</p>
+            <div class="sc-testimonial-by">{{name}} | {{role}}</div>
+          </article>
+        {{/testimonials}}
+      </div>
+    </div>
+  </section>
+  {{/hastestimonials}}
+
+  {{#hasfaq}}
+  <section class="sc-section sc-section--soft">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="sc-faq">
+        {{#faq}}
+          <details class="sc-faq-item">
+            <summary>{{question}}</summary>
+            <div class="sc-faq-answer">{{answer}}</div>
+          </details>
+        {{/faq}}
+      </div>
+    </div>
+  </section>
+  {{/hasfaq}}
+
+  <section class="sc-cta">
+    <div class="sc-container sc-cta-inner">
+      <div>
+        <h2>Prêt à démarrer ?</h2>
+        <p>Créez votre compte et commencez un parcours en quelques minutes.</p>
+      </div>
+      <div class="sc-cta-actions">
+        <a class="sc-btn sc-btn--primary" href="{{signupurl}}">Créer un compte</a>
+        <a class="sc-btn sc-btn--secondary" href="{{loginurl}}">Se connecter</a>
+      </div>
+    </div>
+  </section>
+</main>

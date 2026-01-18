@@ -1,0 +1,236 @@
+<div class="cs-landing cs-landing--full {{#hastoplinks}}has-topstrip{{/hastoplinks}}">
+
+  <!-- Top strip -->
+  {{#hastoplinks}}
+  <div class="cs-topstrip">
+    <div class="cs-container cs-topstrip__inner">
+      <nav class="cs-topstrip__nav" aria-label="Menu haut">
+        {{#toplinks}}
+          <a class="cs-topstrip__link {{#active}}is-active{{/active}}" href="{{{url}}}">
+            {{label}}
+          </a>
+        {{/toplinks}}
+      </nav>
+    </div>
+  </div>
+  {{/hastoplinks}}
+
+  <!-- Header -->
+  <header class="cs-topbar">
+    <div class="cs-container">
+      <div class="cs-brand">
+        <a class="cs-brand__logo" href="{{{config.wwwroot}}}">
+          <img src="{{{config.wwwroot}}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
+          <span class="cs-brand__tagline">training</span>
+        </a>
+      </div>
+
+      <nav class="cs-nav">
+        <a class="cs-nav__link" href="{{{config.wwwroot}}}/course/index.php">Explorer</a>
+        <a class="cs-nav__btn cs-btn cs-btn--ghost" href="{{{config.wwwroot}}}/login/index.php">Connexion</a>
+        <a class="cs-nav__btn cs-btn cs-btn--primary" href="{{{config.wwwroot}}}/login/signup.php">S’inscrire</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="cs-hero">
+    <div class="cs-container cs-hero__grid">
+      <div class="cs-hero__content">
+        <h1>{{hero_title}}</h1>
+        <p class="cs-lead">{{hero_subtitle}}</p>
+
+        <div class="cs-ctaRow">
+          <a class="cs-btn cs-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
+          <a class="cs-btn cs-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
+        </div>
+      </div>
+
+      <div class="cs-hero__visual">
+        <div class="cs-visual-card">
+          <div class="cs-visual-card__badge">Landing</div>
+          <h3>{{page_title}}</h3>
+          <p>Une page marketing dédiée avec contenu personnalisé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="cs-section">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Ce que vous obtenez</h2>
+      </div>
+
+      <div class="cs-grid cs-grid--3">
+        {{#features}}
+          <div class="cs-card">
+            <div class="cs-card__title">{{title}}</div>
+            <div class="cs-card__meta">{{text}}</div>
+          </div>
+        {{/features}}
+      </div>
+    </div>
+  </section>
+
+  {{#hascategories}}
+  <section class="cs-section">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Catégories populaires</h2>
+        <a class="cs-link" href="{{{config.wwwroot}}}/course/index.php">Tout voir →</a>
+      </div>
+      <div class="cs-grid cs-grid--4">
+        {{#categories}}
+          <a class="cs-card" href="{{{url}}}">
+            <div class="cs-card__title">{{name}}</div>
+            <div class="cs-card__meta">{{meta}}</div>
+          </a>
+        {{/categories}}
+      </div>
+    </div>
+  </section>
+  {{/hascategories}}
+
+  {{#hascourses}}
+  <section class="cs-section cs-section--muted">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Cours recommandés</h2>
+        <a class="cs-link" href="{{{config.wwwroot}}}/course/search.php">Voir tout →</a>
+      </div>
+      <div class="cs-grid cs-grid--4">
+        {{#courses}}
+          <a class="cs-course" href="{{{url}}}">
+            <div class="cs-course__thumb">
+              <div class="cs-course__thumbInner"></div>
+            </div>
+            <div class="cs-course__body">
+              <div class="cs-course__title">{{title}}</div>
+              <div class="cs-course__summary">{{summary}}</div>
+              <div class="cs-course__cta">{{cta}}</div>
+            </div>
+          </a>
+        {{/courses}}
+      </div>
+    </div>
+  </section>
+  {{/hascourses}}
+
+  {{#hasprograms}}
+  <section class="cs-section cs-section--muted">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Programmes recommandés</h2>
+      </div>
+      <div class="cs-grid cs-grid--3">
+        {{#programs}}
+          <article class="cs-card cs-card--program">
+            <div class="cs-card__eyebrow">{{tag}}</div>
+            <div class="cs-card__title">{{title}}</div>
+            <div class="cs-card__meta">{{summary}}</div>
+            <div class="cs-card__meta">{{details}}</div>
+            <a class="cs-link" href="{{{url}}}">{{cta}}</a>
+          </article>
+        {{/programs}}
+      </div>
+    </div>
+  </section>
+  {{/hasprograms}}
+
+  {{#hasoutcomes}}
+  <section class="cs-section">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Résultats observés</h2>
+      </div>
+      <div class="cs-outcomes">
+        {{#outcomes}}
+          <div class="cs-outcome">
+            <div class="cs-outcome__value">{{value}}</div>
+            <div class="cs-outcome__label">{{label}}</div>
+          </div>
+        {{/outcomes}}
+      </div>
+    </div>
+  </section>
+  {{/hasoutcomes}}
+
+  {{#hassteps}}
+  <section class="cs-section cs-section--muted">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Comment ça marche</h2>
+      </div>
+      <div class="cs-steps">
+        {{#steps}}
+          <div class="cs-step">
+            <div class="cs-step__number">{{number}}</div>
+            <div class="cs-step__title">{{title}}</div>
+            <div class="cs-step__text">{{text}}</div>
+          </div>
+        {{/steps}}
+      </div>
+    </div>
+  </section>
+  {{/hassteps}}
+
+  {{#hascasestudies}}
+  <section class="cs-section">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Études de cas</h2>
+      </div>
+      <div class="cs-grid cs-grid--3">
+        {{#casestudies}}
+          <article class="cs-card cs-card--case">
+            <div class="cs-card__title">{{title}}</div>
+            <div class="cs-card__meta">{{text}}</div>
+            <div class="cs-card__meta"><strong>{{result}}</strong></div>
+          </article>
+        {{/casestudies}}
+      </div>
+    </div>
+  </section>
+  {{/hascasestudies}}
+
+  {{#hasfaq}}
+  <section class="cs-section">
+    <div class="cs-container">
+      <div class="cs-section__head">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="cs-faq">
+        {{#faq}}
+          <details class="cs-faq__item">
+            <summary>{{question}}</summary>
+            <div class="cs-faq__answer">{{answer}}</div>
+          </details>
+        {{/faq}}
+      </div>
+    </div>
+  </section>
+  {{/hasfaq}}
+
+  {{#extra_html}}
+    {{{extra_html}}}
+  {{/extra_html}}
+
+  <!-- CTA -->
+  <section class="cs-cta">
+    <div class="cs-container cs-cta__box">
+      <div>
+        <h2>Commencer maintenant</h2>
+        <p>Créez un compte et découvrez les cours disponibles.</p>
+      </div>
+      <div class="cs-cta__actions">
+        <a class="cs-btn cs-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
+        <a class="cs-btn cs-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
+      </div>
+    </div>
+  </section>
+
+  {{> theme_spacechild/spacechild/landing_footer }}
+
+</div>
