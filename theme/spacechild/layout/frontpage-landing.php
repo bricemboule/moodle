@@ -24,6 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $PAGE;
+
+$PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
+
 if (isloggedin() && !isguestuser()) {
     require(__DIR__ . '/tmpl-frontpage.php');
     return;

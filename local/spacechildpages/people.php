@@ -6,15 +6,25 @@ $PAGE->set_url(new moodle_url('/local/spacechildpages/people.php'));
 $PAGE->set_pagelayout('embedded');
 $PAGE->set_title('Pour les personnes');
 $PAGE->set_heading('Pour les personnes');
+$PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
 
 $peopleurl = new moodle_url('/local/spacechildpages/people.php');
 
 $universitiesurl = new moodle_url('/local/spacechildpages/universities.php');
 $governmentsurl = new moodle_url('/local/spacechildpages/governments.php');
 $loginurl = new moodle_url('/login/index.php');
-$signupurl = new moodle_url('/login/signup.php');
+$signupurl = new moodle_url('/local/spacechildpages/enrol_request.php');
 $supporturl = new moodle_url('/user/contactsitesupport.php');
 $sitename = format_string($SITE->shortname ?: $SITE->fullname);
+
+$marketingcategories = [];
+if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+    $marketingcategories = \local_spacechildpages\marketing_categories::get_categories(8);
+}
+$marketingcourses = [];
+if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+    $marketingcourses = \local_spacechildpages\marketing_courses::get_courses(8);
+}
 
 $ctx = [
     'config' => [
@@ -50,10 +60,13 @@ $ctx = [
     'hero_title' => 'Des compétences utiles, à votre rythme.',
     'hero_subtitle' => 'Parcours guidés, projets pratiques et certifications pour booster votre avenir.',
     'page_title' => 'Pour les personnes',
+    'hidecta' => true,
+    'hero_image' => (new moodle_url('/theme/spacechild/images/personne.png'))->out(false),
+    'hero_image_alt' => 'Illustration apprentissage individuel',
     'cta_primary_label' => 'Explorer les cours',
     'cta_primary_url' => (new moodle_url('/course/search.php'))->out(false),
     'cta_secondary_label' => 'Créer un compte',
-    'cta_secondary_url' => (new moodle_url('/login/signup.php'))->out(false),
+    'cta_secondary_url' => $signupurl->out(false),
     'features' => [
         [
             'title' => 'Parcours guidés',
@@ -68,88 +81,10 @@ $ctx = [
             'text' => 'Construisez un portfolio avec des cas concrets.',
         ],
     ],
-    'hascategories' => true,
-    'categories' => [
-        [
-            'name' => 'Data & IA',
-            'meta' => 'Débutant à avancé',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-        ],
-        [
-            'name' => 'Business & Management',
-            'meta' => 'Compétences pro',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'business']))->out(false),
-        ],
-        [
-            'name' => 'Design & UX',
-            'meta' => 'Portfolio créatif',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'design']))->out(false),
-        ],
-        [
-            'name' => 'Marketing digital',
-            'meta' => 'Acquisition & contenu',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'marketing']))->out(false),
-        ],
-        [
-            'name' => 'Cloud & DevOps',
-            'meta' => 'Infrastructure moderne',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'cloud']))->out(false),
-        ],
-        [
-            'name' => 'Langues',
-            'meta' => 'Certificats & pratique',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'anglais']))->out(false),
-        ],
-        [
-            'name' => 'Bureautique',
-            'meta' => 'Excel, PowerPoint',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'excel']))->out(false),
-        ],
-        [
-            'name' => 'Product',
-            'meta' => 'Stratégie & delivery',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'product']))->out(false),
-        ],
-    ],
-    'hascourses' => true,
-    'courses' => [
-        [
-            'title' => 'Python pour l’analyse de données',
-            'summary' => 'Bases Python, Pandas et visualisation.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'python']))->out(false),
-        ],
-        [
-            'title' => 'UX/UI Design Essentials',
-            'summary' => 'Recherche utilisateur et prototypage.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'ux']))->out(false),
-        ],
-        [
-            'title' => 'Marketing digital 360',
-            'summary' => 'SEO, publicité et contenu.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'marketing']))->out(false),
-        ],
-        [
-            'title' => 'Gestion de projet agile',
-            'summary' => 'Scrum, Kanban et pilotage.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'agile']))->out(false),
-        ],
-        [
-            'title' => 'Fondamentaux Cloud',
-            'summary' => 'Services clés, sécurité et déploiement.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'cloud']))->out(false),
-        ],
-        [
-            'title' => 'Anglais professionnel',
-            'summary' => 'Vocabulaire métier et pratique.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'anglais']))->out(false),
-        ],
-    ],
+    'hascategories' => !empty($marketingcategories),
+    'categories' => $marketingcategories,
+    'hascourses' => !empty($marketingcourses),
+    'courses' => $marketingcourses,
     'hasprograms' => true,
     'programs' => [
         [

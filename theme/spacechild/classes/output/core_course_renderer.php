@@ -51,8 +51,22 @@ class core_course_renderer extends \core_course_renderer {
     protected function guest_frontpage(): string {
         global $CFG, $SITE, $DB;
 
-        $categories = $this->get_frontpage_categories(8);
-        $courses = $this->get_frontpage_courses(8);
+        $categories = [];
+        if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+            $categories = \local_spacechildpages\marketing_categories::get_categories(8);
+        }
+        $courses = [];
+        if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+            $courses = \local_spacechildpages\marketing_courses::get_courses(8);
+        }
+
+        $courseplaceholders = $this->course_placeholder_images();
+        foreach ($courses as $index => $course) {
+            if (empty($course['image'])) {
+                $seed = $course['title'] ?? $index;
+                $courses[$index]['image'] = $this->pick_placeholder_image($courseplaceholders, $seed);
+            }
+        }
 
         $logourl = $this->page->theme->setting_file_url('logo', 'logo');
         if (empty($logourl)) {
@@ -79,7 +93,7 @@ class core_course_renderer extends \core_course_renderer {
             'exploreurl' => (new moodle_url('/course/index.php'))->out(false),
             'searchurl' => (new moodle_url('/course/search.php'))->out(false),
             'loginurl' => (new moodle_url('/login/index.php'))->out(false),
-            'signupurl' => (new moodle_url('/login/signup.php'))->out(false),
+            'signupurl' => (new moodle_url('/local/spacechildpages/enrol_request.php'))->out(false),
             'supporturl' => (new moodle_url('/user/contactsitesupport.php'))->out(false),
             'peopleurl' => (new moodle_url('/local/spacechildpages/people.php'))->out(false),
             'businessurl' => (new moodle_url('/local/spacechildpages/business.php'))->out(false),

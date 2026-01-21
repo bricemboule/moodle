@@ -1,8 +1,8 @@
 .cs-landing {
   --cs-primary: #2f7d32;
   --cs-primary-strong: #1f5a23;
-  --cs-accent: #7a1f2b;
-  --cs-accent-strong: #5b1420;
+  --cs-accent: #b53a3d;
+  --cs-accent-strong: #8f2e31;
   --cs-hero-gradient: linear-gradient(180deg, rgba(47,125,50,.14) 0%, rgba(122,31,43,.06) 55%, #ffffff 80%);
   --cs-ring: 0 0 0 3px rgba(47,125,50,.18);
 }
@@ -10,7 +10,11 @@
 .cs-nav__link:hover { color: var(--cs-accent); }
 
 .cs-btn {
-  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
+  transition: transform .18s cubic-bezier(0.16, 1, 0.3, 1), background-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+
+.cs-btn:hover {
+  transform: translateY(-2px);
 }
 
 .cs-btn--primary {

@@ -6,15 +6,25 @@ $PAGE->set_url(new moodle_url('/local/spacechildpages/universities.php'));
 $PAGE->set_pagelayout('embedded');
 $PAGE->set_title('Pour les universités');
 $PAGE->set_heading('Pour les universités');
+$PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
 
 $peopleurl = new moodle_url('/local/spacechildpages/people.php');
 
 $universitiesurl = new moodle_url('/local/spacechildpages/universities.php');
 $governmentsurl = new moodle_url('/local/spacechildpages/governments.php');
 $loginurl = new moodle_url('/login/index.php');
-$signupurl = new moodle_url('/login/signup.php');
+$signupurl = new moodle_url('/local/spacechildpages/enrol_request.php');
 $supporturl = new moodle_url('/user/contactsitesupport.php');
 $sitename = format_string($SITE->shortname ?: $SITE->fullname);
+
+$marketingcategories = [];
+if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+    $marketingcategories = \local_spacechildpages\marketing_categories::get_categories(8);
+}
+$marketingcourses = [];
+if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+    $marketingcourses = \local_spacechildpages\marketing_courses::get_courses(8);
+}
 
 $ctx = [
     'config' => [
@@ -48,6 +58,9 @@ $ctx = [
     'hero_title' => 'Des parcours clairs pour vos étudiants.',
     'hero_subtitle' => 'Branding, suivi et catalogue structuré pour moderniser votre campus.',
     'page_title' => 'Pour les universités',
+    'hidecta' => true,
+    'hero_image' => (new moodle_url('/theme/spacechild/images/universite.jpeg'))->out(false),
+    'hero_image_alt' => 'Illustration universités et campus',
     'cta_primary_label' => 'Demander une démo',
    
     'cta_secondary_label' => 'Voir le catalogue',
@@ -66,88 +79,10 @@ $ctx = [
             'text' => 'Recherche, filtres et organisation par compétences.',
         ],
     ],
-    'hascategories' => true,
-    'categories' => [
-        [
-            'name' => 'Informatique',
-            'meta' => 'Développement & systèmes',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'informatique']))->out(false),
-        ],
-        [
-            'name' => 'Sciences & Data',
-            'meta' => 'Analyse & statistiques',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-        ],
-        [
-            'name' => 'Management',
-            'meta' => 'Stratégie & leadership',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'management']))->out(false),
-        ],
-        [
-            'name' => 'Santé',
-            'meta' => 'Parcours cliniques',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'sante']))->out(false),
-        ],
-        [
-            'name' => 'Langues',
-            'meta' => 'Certifications',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'langues']))->out(false),
-        ],
-        [
-            'name' => 'Pédagogie',
-            'meta' => 'Innovation éducative',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'pedagogie']))->out(false),
-        ],
-        [
-            'name' => 'Recherche',
-            'meta' => 'Méthodes & outils',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'recherche']))->out(false),
-        ],
-        [
-            'name' => 'Entrepreneuriat',
-            'meta' => 'Incubation & projets',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'entrepreneuriat']))->out(false),
-        ],
-    ],
-    'hascourses' => true,
-    'courses' => [
-        [
-            'title' => 'Initiation au Data Science',
-            'summary' => 'Probabilités, Python et visualisation.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-        ],
-        [
-            'title' => 'Méthodologie de recherche',
-            'summary' => 'Protocoles, bibliographie et rédaction.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'recherche']))->out(false),
-        ],
-        [
-            'title' => 'Programmation Web',
-            'summary' => 'HTML, CSS, JavaScript et projets.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'web']))->out(false),
-        ],
-        [
-            'title' => 'Pédagogie active',
-            'summary' => 'Apprentissage par projets et évaluation.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'pedagogie']))->out(false),
-        ],
-        [
-            'title' => 'Gestion de projet universitaire',
-            'summary' => 'Planification et coordination d’équipes.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'projet']))->out(false),
-        ],
-        [
-            'title' => 'Anglais académique',
-            'summary' => 'Présentations, publications et échanges.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'anglais']))->out(false),
-        ],
-    ],
+    'hascategories' => !empty($marketingcategories),
+    'categories' => $marketingcategories,
+    'hascourses' => !empty($marketingcourses),
+    'courses' => $marketingcourses,
     'hasprograms' => true,
     'programs' => [
         [

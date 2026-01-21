@@ -51,83 +51,16 @@ class renderer extends \theme_space\output\core\course_renderer {
     protected function guest_frontpage(): string {
         global $CFG, $SITE, $DB;
 
-        $categories = $this->get_frontpage_categories(4);
-        $courses = $this->get_frontpage_courses(4);
+        $categories = [];
+        if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+            $categories = \local_spacechildpages\marketing_categories::get_categories(4);
+        }
+        $courses = [];
+        if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+            $courses = \local_spacechildpages\marketing_courses::get_courses(4);
+        }
         $categoryplaceholders = $this->category_placeholder_images();
         $courseplaceholders = $this->course_placeholder_images();
-
-        if (count($categories) < 4) {
-            $fallbackcategories = [
-                [
-                    'name' => 'Developpement web',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'web']))->out(false),
-                ],
-                [
-                    'name' => 'Data & IA',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-                ],
-                [
-                    'name' => 'Gestion de projet',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'projet']))->out(false),
-                ],
-                [
-                    'name' => 'Marketing digital',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'marketing']))->out(false),
-                ],
-                [
-                    'name' => 'Langues',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'langues']))->out(false),
-                ],
-                [
-                    'name' => 'Bureautique',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'office']))->out(false),
-                ],
-            ];
-
-            foreach ($fallbackcategories as $fallback) {
-                $categories[] = $fallback;
-                if (count($categories) >= 4) {
-                    break;
-                }
-            }
-        }
-
-        if (count($courses) < 4) {
-            $fallbackcourses = [
-                [
-                    'title' => 'Excel pour debutants',
-                    'summary' => 'Bases Excel, tableaux, formules et graphiques.',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'excel']))->out(false),
-                ],
-                [
-                    'title' => 'Python pour debutants',
-                    'summary' => 'Scripts simples, data et automatisation.',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'python']))->out(false),
-                ],
-                [
-                    'title' => 'Gestion de projet agile',
-                    'summary' => 'Planifier, livrer, gerer risques et equipes.',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'agile']))->out(false),
-                ],
-                [
-                    'title' => 'Communication professionnelle',
-                    'summary' => 'E-mails, presentations et prise de parole.',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'communication']))->out(false),
-                ],
-                [
-                    'title' => 'Marketing digital',
-                    'summary' => 'SEO, reseaux sociaux et campagnes.',
-                    'url' => (new moodle_url('/course/search.php', ['search' => 'marketing']))->out(false),
-                ],
-            ];
-
-            foreach ($fallbackcourses as $fallback) {
-                $courses[] = $fallback;
-                if (count($courses) >= 4) {
-                    break;
-                }
-            }
-        }
 
         foreach ($categories as $index => $category) {
             if (empty($category['image'])) {
@@ -155,7 +88,7 @@ class renderer extends \theme_space\output\core\course_renderer {
                 'url' => (new moodle_url('/local/spacechildpages/people.php'))->out(false),
             ],
             [
-                'label' => 'Pour les universites',
+                'label' => 'Pour les universités',
                 'url' => (new moodle_url('/local/spacechildpages/universities.php'))->out(false),
             ],
             [
@@ -165,6 +98,10 @@ class renderer extends \theme_space\output\core\course_renderer {
         ];
 
         $businessurl = (new moodle_url('/local/spacechildpages/business.php'))->out(false);
+
+        $statlearners = $DB->count_records_select('user', 'deleted = 0 AND suspended = 0');
+        $statcourses = $DB->count_records_select('course', 'id <> :siteid', ['siteid' => SITEID]);
+        $statpartners = $DB->count_records_select('course_categories', 'visible = 1');
 
         $carousel = [
             [
@@ -181,7 +118,7 @@ class renderer extends \theme_space\output\core\course_renderer {
                     'title' => 'Commencer, changer ou evoluer',
                     'text' => 'Des parcours clairs et des projets pour progresser.',
                     'cta' => 'S\'inscrire gratuitement',
-                    'url' => (new moodle_url('/login/signup.php'))->out(false),
+                    'url' => (new moodle_url('/local/spacechildpages/enrol_request.php'))->out(false),
                     'icon' => $CFG->wwwroot . '/theme/spacechild/pix/landing/course-ai.svg',
                 ],
             ],
@@ -266,16 +203,13 @@ class renderer extends \theme_space\output\core\course_renderer {
             'exploreurl' => (new moodle_url('/course/index.php'))->out(false),
             'searchurl' => (new moodle_url('/course/search.php'))->out(false),
             'loginurl' => (new moodle_url('/login/index.php'))->out(false),
-            'signupurl' => (new moodle_url('/login/signup.php'))->out(false),
-            'statlearners' => format_float(
-                $DB->count_records_select('user', 'deleted = 0 AND suspended = 0'),
-            0),
-            'statcourses' => format_float(
-                $DB->count_records_select('course', 'id <> :siteid', ['siteid' => SITEID]),
-            0),
-            'statpartners' => format_float(
-                $DB->count_records_select('course_categories', 'visible = 1'),
-            0),
+            'signupurl' => (new moodle_url('/local/spacechildpages/enrol_request.php'))->out(false),
+            'statlearners' => format_float($statlearners, 0),
+            'statlearnersraw' => $statlearners,
+            'statcourses' => format_float($statcourses, 0),
+            'statcoursesraw' => $statcourses,
+            'statpartners' => format_float($statpartners, 0),
+            'statpartnersraw' => $statpartners,
             'hascategories' => !empty($categories),
             'categories' => $categories,
             'hascourses' => !empty($courses),

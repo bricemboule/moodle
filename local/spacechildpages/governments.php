@@ -6,15 +6,25 @@ $PAGE->set_url(new moodle_url('/local/spacechildpages/governments.php'));
 $PAGE->set_pagelayout('embedded');
 $PAGE->set_title('Pour les gouvernements');
 $PAGE->set_heading('Pour les gouvernements');
+$PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
 
 $peopleurl = new moodle_url('/local/spacechildpages/people.php');
 
 $universitiesurl = new moodle_url('/local/spacechildpages/universities.php');
 $governmentsurl = new moodle_url('/local/spacechildpages/governments.php');
 $loginurl = new moodle_url('/login/index.php');
-$signupurl = new moodle_url('/login/signup.php');
+$signupurl = new moodle_url('/local/spacechildpages/enrol_request.php');
 $supporturl = new moodle_url('/user/contactsitesupport.php');
 $sitename = format_string($SITE->shortname ?: $SITE->fullname);
+
+$marketingcategories = [];
+if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+    $marketingcategories = \local_spacechildpages\marketing_categories::get_categories(8);
+}
+$marketingcourses = [];
+if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+    $marketingcourses = \local_spacechildpages\marketing_courses::get_courses(8);
+}
 
 $ctx = [
     'config' => [
@@ -48,6 +58,9 @@ $ctx = [
     'hero_title' => 'Former à grande échelle, en toute conformité.',
     'hero_subtitle' => 'Gouvernance, sécurité et indicateurs d’impact pour les institutions.',
     'page_title' => 'Pour les gouvernements',
+    'hidecta' => true,
+    'hero_image' => (new moodle_url('/theme/spacechild/images/gouverne.png'))->out(false),
+    'hero_image_alt' => 'Illustration institutions publiques',
     'cta_primary_label' => 'Parler à un expert',
    
     'cta_secondary_label' => 'Voir le catalogue',
@@ -66,88 +79,10 @@ $ctx = [
             'text' => 'Statistiques, progression et indicateurs par région.',
         ],
     ],
-    'hascategories' => true,
-    'categories' => [
-        [
-            'name' => 'Transformation numérique',
-            'meta' => 'Modernisation des services',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'numerique']))->out(false),
-        ],
-        [
-            'name' => 'Sécurité & cybersécurité',
-            'meta' => 'Conformité & pratiques',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'securite']))->out(false),
-        ],
-        [
-            'name' => 'Gestion de projet',
-            'meta' => 'Pilotage & budgets',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'projet']))->out(false),
-        ],
-        [
-            'name' => 'Service public',
-            'meta' => 'Qualité & relation usager',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'service']))->out(false),
-        ],
-        [
-            'name' => 'Conformité & RGPD',
-            'meta' => 'Procédures & audits',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'rgpd']))->out(false),
-        ],
-        [
-            'name' => 'Data & BI',
-            'meta' => 'Indicateurs & reporting',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-        ],
-        [
-            'name' => 'Communication',
-            'meta' => 'Information & transparence',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'communication']))->out(false),
-        ],
-        [
-            'name' => 'Leadership public',
-            'meta' => 'Gestion des équipes',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'leadership']))->out(false),
-        ],
-    ],
-    'hascourses' => true,
-    'courses' => [
-        [
-            'title' => 'Transformation numérique',
-            'summary' => 'Stratégie, gouvernance et mise en œuvre.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'numerique']))->out(false),
-        ],
-        [
-            'title' => 'Culture cyber',
-            'summary' => 'Sensibilisation aux risques et bonnes pratiques.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'securite']))->out(false),
-        ],
-        [
-            'title' => 'Gestion de projet public',
-            'summary' => 'Planification, budgets et parties prenantes.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'projet']))->out(false),
-        ],
-        [
-            'title' => 'Service public centré usager',
-            'summary' => 'Expérience et qualité de service.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'service']))->out(false),
-        ],
-        [
-            'title' => 'RGPD & conformité',
-            'summary' => 'Cadre légal et gestion des données.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'rgpd']))->out(false),
-        ],
-        [
-            'title' => 'Tableaux de bord publics',
-            'summary' => 'KPI, reporting et pilotage.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'kpi']))->out(false),
-        ],
-    ],
+    'hascategories' => !empty($marketingcategories),
+    'categories' => $marketingcategories,
+    'hascourses' => !empty($marketingcourses),
+    'courses' => $marketingcourses,
     'hasprograms' => true,
     'programs' => [
         [

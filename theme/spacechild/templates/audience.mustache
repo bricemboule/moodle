@@ -18,25 +18,25 @@
   <!-- Header -->
   <header class="cs-topbar">
     <div class="cs-container">
-      <div class="cs-brand">
+      <div class="cs-brand cs-animate-left">
         <a class="cs-brand__logo" href="{{{config.wwwroot}}}">
           <img src="{{{config.wwwroot}}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
           <span class="cs-brand__tagline">training</span>
         </a>
       </div>
 
-      <nav class="cs-nav">
+      <nav class="cs-nav cs-animate-right">
         <a class="cs-nav__link" href="{{{config.wwwroot}}}/course/index.php">Explorer</a>
         <a class="cs-nav__btn cs-btn cs-btn--ghost" href="{{{config.wwwroot}}}/login/index.php">Connexion</a>
-        <a class="cs-nav__btn cs-btn cs-btn--primary" href="{{{config.wwwroot}}}/login/signup.php">S’inscrire</a>
+        <a class="cs-nav__btn cs-btn cs-btn--primary" href="{{{signupurl}}}" data-signup-modal>S’inscrire</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="cs-hero">
+  <section class="cs-hero cs-animate">
     <div class="cs-container cs-hero__grid">
-      <div class="cs-hero__content">
+      <div class="cs-hero__content cs-stagger cs-animate-left">
         <h1>{{hero_title}}</h1>
         <p class="cs-lead">{{hero_subtitle}}</p>
 
@@ -47,10 +47,21 @@
       </div>
 
       <div class="cs-hero__visual">
-        <div class="cs-visual-card">
-          <div class="cs-visual-card__badge">Landing</div>
-          <h3>{{page_title}}</h3>
-          <p>Une page marketing dédiée avec contenu personnalisé.</p>
+        <div class="cs-visual-card cs-animate-right">
+          {{#hero_badge}}
+          <div class="cs-visual-card__badge">{{hero_badge}}</div>
+          {{/hero_badge}}
+          {{#hero_card_title}}
+          <h3>{{hero_card_title}}</h3>
+          {{/hero_card_title}}
+          {{#hero_card_text}}
+          <p>{{hero_card_text}}</p>
+          {{/hero_card_text}}
+          {{#hero_image}}
+          <div class="cs-visual-card__media">
+            <img src="{{hero_image}}" alt="{{hero_image_alt}}">
+          </div>
+          {{/hero_image}}
         </div>
       </div>
     </div>
@@ -59,11 +70,11 @@
   <!-- Features -->
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Ce que vous obtenez</h2>
       </div>
 
-      <div class="cs-grid cs-grid--3">
+      <div class="cs-grid cs-grid--3 cs-stagger">
         {{#features}}
           <div class="cs-card">
             <div class="cs-card__title">{{title}}</div>
@@ -77,11 +88,11 @@
   {{#hascategories}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Catégories populaires</h2>
         <a class="cs-link" href="{{{config.wwwroot}}}/course/index.php">Tout voir →</a>
       </div>
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         {{#categories}}
           <a class="cs-card" href="{{{url}}}">
             <div class="cs-card__title">{{name}}</div>
@@ -96,22 +107,29 @@
   {{#hascourses}}
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Cours recommandés</h2>
         <a class="cs-link" href="{{{config.wwwroot}}}/course/search.php">Voir tout →</a>
       </div>
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         {{#courses}}
-          <a class="cs-course" href="{{{url}}}">
+          <article class="cs-course">
             <div class="cs-course__thumb">
-              <div class="cs-course__thumbInner"></div>
+              {{#image}}
+                <img src="{{{image}}}" alt="{{title}}" loading="lazy">
+              {{/image}}
+              {{^image}}
+                <div class="cs-course__thumbInner"></div>
+              {{/image}}
             </div>
             <div class="cs-course__body">
               <div class="cs-course__title">{{title}}</div>
               <div class="cs-course__summary">{{summary}}</div>
-              <div class="cs-course__cta">{{cta}}</div>
+              {{#canrequest}}
+              <a class="cs-course__cta" href="{{{enrolurl}}}" data-signup-modal>Demander l’inscription →</a>
+              {{/canrequest}}
             </div>
-          </a>
+          </article>
         {{/courses}}
       </div>
     </div>
@@ -121,10 +139,10 @@
   {{#hasprograms}}
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Programmes recommandés</h2>
       </div>
-      <div class="cs-grid cs-grid--3">
+      <div class="cs-grid cs-grid--3 cs-stagger">
         {{#programs}}
           <article class="cs-card cs-card--program">
             <div class="cs-card__eyebrow">{{tag}}</div>
@@ -142,10 +160,10 @@
   {{#hasoutcomes}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Résultats observés</h2>
       </div>
-      <div class="cs-outcomes">
+      <div class="cs-outcomes cs-stagger">
         {{#outcomes}}
           <div class="cs-outcome">
             <div class="cs-outcome__value">{{value}}</div>
@@ -160,10 +178,10 @@
   {{#hassteps}}
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Comment ça marche</h2>
       </div>
-      <div class="cs-steps">
+      <div class="cs-steps cs-stagger">
         {{#steps}}
           <div class="cs-step">
             <div class="cs-step__number">{{number}}</div>
@@ -179,10 +197,10 @@
   {{#hascasestudies}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Études de cas</h2>
       </div>
-      <div class="cs-grid cs-grid--3">
+      <div class="cs-grid cs-grid--3 cs-stagger">
         {{#casestudies}}
           <article class="cs-card cs-card--case">
             <div class="cs-card__title">{{title}}</div>
@@ -198,10 +216,10 @@
   {{#hasfaq}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Questions fréquentes</h2>
       </div>
-      <div class="cs-faq">
+      <div class="cs-faq cs-stagger">
         {{#faq}}
           <details class="cs-faq__item">
             <summary>{{question}}</summary>
@@ -217,9 +235,10 @@
     {{{extra_html}}}
   {{/extra_html}}
 
+  {{^hidecta}}
   <!-- CTA -->
   <section class="cs-cta">
-    <div class="cs-container cs-cta__box">
+    <div class="cs-container cs-cta__box cs-animate-zoom">
       <div>
         <h2>Commencer maintenant</h2>
         <p>Créez un compte et découvrez les cours disponibles.</p>
@@ -230,7 +249,9 @@
       </div>
     </div>
   </section>
+  {{/hidecta}}
 
+  {{> theme_spacechild/spacechild/signup_modal }}
   {{> theme_spacechild/spacechild/landing_footer }}
 
 </div>

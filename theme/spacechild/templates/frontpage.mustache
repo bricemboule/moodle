@@ -18,7 +18,7 @@
   <!-- Top bar -->
   <header class="cs-topbar">
     <div class="cs-container cs-topbar__inner">
-      <div class="cs-topbar__brand">
+      <div class="cs-topbar__brand cs-animate-left">
         <a class="cs-brand__logo" href="{{{exploreurl}}}">
           <img src="{{wwwroot}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
           <span class="cs-brand__tagline">training</span>
@@ -29,7 +29,7 @@
         </nav>
       </div>
 
-      <form class="cs-topbar__search" action="{{{searchurl}}}" method="get" role="search">
+      <form class="cs-topbar__search cs-animate-zoom" action="{{{searchurl}}}" method="get" role="search">
         <input
           class="cs-topbar__search-input"
           type="text"
@@ -40,15 +40,15 @@
         <button class="cs-topbar__search-btn" type="submit">Rechercher</button>
       </form>
 
-      <nav class="cs-topbar__actions">
+      <nav class="cs-topbar__actions cs-animate-right">
         <a class="cs-topbar__link cs-topbar__link--muted" href="{{{loginurl}}}">Connexion</a>
-        <a class="cs-btn cs-btn--ghost" href="{{{signupurl}}}">Inscrivez-vous gratuitement</a>
+        <a class="cs-btn cs-btn--ghost" href="{{{signupurl}}}" data-signup-modal>Inscrivez-vous gratuitement</a>
       </nav>
     </div>
   </header>
 
    <!-- Announcement carousel -->
-  <section class="cs-announcement" aria-label="Annonces">
+  <section class="cs-announcement cs-animate" aria-label="Annonces">
     <div class="cs-container">
       <div class="cs-announcement__viewport">
         <div class="cs-announcement__track">
@@ -71,20 +71,15 @@
 
   <!-- Hero carousel -->
   {{#hascarousel}}
-  <section class="cs-hero cs-hero--carousel">
+  <section class="cs-hero cs-hero--carousel cs-animate">
     <div class="cs-container">
       <div class="cs-carousel" role="region" aria-label="Annonces principales" style="--cs-carousel-count: {{carouselcount}};">
-        <div class="cs-carousel__controls" aria-hidden="true">
-          <span class="cs-carousel__control cs-carousel__control--prev">&lsaquo;</span>
-          <span class="cs-carousel__control cs-carousel__control--next">&rsaquo;</span>
-        </div>
-
         <div class="cs-carousel__viewport">
           <div class="cs-carousel__track">
             {{#carousel}}
             <div class="cs-carousel__slide">
               {{#primary}}
-              <article class="cs-promo cs-promo--brand">
+              <article class="cs-promo cs-promo--brand cs-stagger cs-animate-left">
                 <div class="cs-promo__tag">{{tag}}</div>
                 <h2>{{title}}</h2>
                 <p>{{text}}</p>
@@ -94,14 +89,14 @@
               {{/primary}}
 
               {{#secondary}}
-              <article class="cs-promo cs-promo--light cs-promo--split">
-                <div class="cs-promo__content">
+              <article class="cs-promo cs-promo--light cs-promo--split cs-animate-right">
+                <div class="cs-promo__content cs-stagger">
                   <div class="cs-promo__tag">{{tag}}</div>
                   <h2>{{title}}</h2>
                   <p>{{text}}</p>
                   <a class="cs-btn cs-btn--ghost" href="{{{url}}}">{{cta}}</a>
                 </div>
-                <div class="cs-promo__visual" aria-hidden="true">
+                <div class="cs-promo__visual cs-animate" aria-hidden="true">
                   <div class="cs-promo__ring"></div>
                   <div class="cs-promo__orb"></div>
                   {{#icon}}
@@ -130,8 +125,8 @@
   <!-- Logos / trust -->
   <section class="cs-trust">
     <div class="cs-container">
-      <p class="cs-trust__title">Ils nous font confiance</p>
-      <div class="cs-trust__logos">
+      <p class="cs-trust__title cs-animate">Ils nous font confiance</p>
+      <div class="cs-trust__logos cs-stagger">
         <span class="cs-pill">Université</span>
         <span class="cs-pill">Entreprise</span>
         <span class="cs-pill">ONG</span>
@@ -141,16 +136,48 @@
     </div>
   </section>
 
+  <section class="cs-metrics" aria-label="Chiffres cles">
+    <div class="cs-container">
+      <div class="cs-metrics__inner">
+        <div class="cs-metrics__intro cs-animate">
+          <span class="cs-metrics__eyebrow">Chiffres cles</span>
+          <h2>Des resultats concrets pour chaque public</h2>
+          <p class="cs-metrics__lead">
+            Suivez la progression des apprenants, la richesse du catalogue et la dynamique des partenaires.
+          </p>
+        </div>
+        <div class="cs-metrics__grid cs-stagger" role="list">
+          <div class="cs-metric" role="listitem">
+            <div class="cs-metric__value" data-countup="1" data-target="200" data-suffix="+">200+</div>
+            <div class="cs-metric__label">Apprenants formes</div>
+          </div>
+          <div class="cs-metric" role="listitem">
+            <div class="cs-metric__value" data-countup="1" data-target="100" data-suffix="+">100+</div>
+            <div class="cs-metric__label">Cours disponibles</div>
+          </div>
+          <div class="cs-metric" role="listitem">
+            <div class="cs-metric__value" data-countup="1" data-target="100" data-suffix="%">100%</div>
+            <div class="cs-metric__label">Satisfaction moyenne</div>
+          </div>
+          <div class="cs-metric" role="listitem">
+            <div class="cs-metric__value" data-countup="1" data-target="20" data-suffix="+">20+</div>
+            <div class="cs-metric__label">Categories actives</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Categories -->
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Catégories populaires</h2>
         <a class="cs-link" href="{{{exploreurl}}}">Tout voir →</a>
       </div>
 
       {{#hascategories}}
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         {{#categories}}
           <a class="cs-card" href="{{{url}}}">
             {{#image}}
@@ -173,10 +200,10 @@
 
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Pourquoi choisir {{sitename}}</h2>
       </div>
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         <div class="cs-card">
           <div class="cs-card__title">Experts terrain</div>
           <div class="cs-card__meta">Cours créés par des professionnels en activité.</div>
@@ -199,10 +226,10 @@
 
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Formats d’apprentissage</h2>
       </div>
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         <div class="cs-card">
           <div class="cs-card__title">Cours vidéo courts</div>
           <div class="cs-card__meta">Leçons de 5-10 min, faciles à suivre.</div>
@@ -226,11 +253,11 @@
   {{#haspaths}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Parcours certifiants</h2>
         <a class="cs-link" href="{{{exploreurl}}}">Voir les parcours →</a>
       </div>
-      <div class="cs-grid cs-grid--3">
+      <div class="cs-grid cs-grid--3 cs-stagger">
         {{#paths}}
           <article class="cs-card cs-card--path">
             <div class="cs-card__eyebrow">{{badge}}</div>
@@ -248,15 +275,15 @@
   <!-- Featured courses -->
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Cours recommandés</h2>
         <a class="cs-link" href="{{{searchurl}}}">Rechercher des cours →</a>
       </div>
 
       {{#hascourses}}
-      <div class="cs-grid cs-grid--4">
+      <div class="cs-grid cs-grid--4 cs-stagger">
         {{#courses}}
-          <a class="cs-course" href="{{{url}}}">
+          <article class="cs-course">
             <div class="cs-course__thumb">
               {{#image}}
                 <img src="{{{image}}}" alt="{{title}}" loading="lazy">
@@ -268,9 +295,11 @@
             <div class="cs-course__body">
               <div class="cs-course__title">{{title}}</div>
               <div class="cs-course__summary">{{summary}}</div>
-              <div class="cs-course__cta">Voir le cours →</div>
+              {{#canrequest}}
+              <a class="cs-course__cta" href="{{{enrolurl}}}" data-signup-modal>Demander l’inscription →</a>
+              {{/canrequest}}
             </div>
-          </a>
+          </article>
         {{/courses}}
       </div>
       {{/hascourses}}
@@ -284,10 +313,10 @@
   {{#hasoutcomes}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Résultats concrets pour les apprenants</h2>
       </div>
-      <div class="cs-outcomes">
+      <div class="cs-outcomes cs-stagger">
         {{#outcomes}}
           <div class="cs-outcome">
             <div class="cs-outcome__value">{{value}}</div>
@@ -302,10 +331,10 @@
   {{#hastestimonials}}
   <section class="cs-section cs-section--muted">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Ce que disent nos apprenants</h2>
       </div>
-      <div class="cs-grid cs-grid--3">
+      <div class="cs-grid cs-grid--3 cs-stagger">
         {{#testimonials}}
           <article class="cs-quote">
             <div class="cs-quote__text">“{{quote}}”</div>
@@ -320,10 +349,10 @@
   {{#hasfaq}}
   <section class="cs-section">
     <div class="cs-container">
-      <div class="cs-section__head">
+      <div class="cs-section__head cs-animate">
         <h2>Questions fréquentes</h2>
       </div>
-      <div class="cs-faq">
+      <div class="cs-faq cs-stagger">
         {{#faq}}
           <details class="cs-faq__item">
             <summary>{{question}}</summary>
@@ -337,6 +366,7 @@
 
  
 
+  {{> theme_spacechild/spacechild/signup_modal }}
   {{> theme_spacechild/spacechild/landing_footer }}
 
 </div>

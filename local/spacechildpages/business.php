@@ -8,6 +8,7 @@ $PAGE->set_url(new moodle_url('/local/spacechildpages/business.php'));
 $PAGE->set_pagelayout('embedded');
 $PAGE->set_title('Pour les affaires');
 $PAGE->set_heading('Pour les affaires');
+$PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
 
 require_once($CFG->dirroot . '/local/spacechildpages/classes/form/business_contact_form.php');
 
@@ -16,9 +17,18 @@ $businessurl = new moodle_url('/local/spacechildpages/business.php');
 $universitiesurl = new moodle_url('/local/spacechildpages/universities.php');
 $governmentsurl = new moodle_url('/local/spacechildpages/governments.php');
 $loginurl = new moodle_url('/login/index.php');
-$signupurl = new moodle_url('/login/signup.php');
+$signupurl = new moodle_url('/local/spacechildpages/enrol_request.php');
 $supporturl = new moodle_url('/user/contactsitesupport.php');
 $sitename = format_string($SITE->shortname ?: $SITE->fullname);
+
+$marketingcategories = [];
+if (class_exists('\\local_spacechildpages\\marketing_categories')) {
+    $marketingcategories = \local_spacechildpages\marketing_categories::get_categories(8);
+}
+$marketingcourses = [];
+if (class_exists('\\local_spacechildpages\\marketing_courses')) {
+    $marketingcourses = \local_spacechildpages\marketing_courses::get_courses(8);
+}
 
 $mform = new business_contact_form();
 
@@ -130,6 +140,11 @@ $ctx = [
     'hero_title' => 'Former vos équipes, mesurer l’impact.',
     'hero_subtitle' => 'Plans simples, reporting et support pour accélérer votre organisation.',
     'page_title' => 'Pour les affaires',
+    'hero_badge' => 'Landing',
+    'hero_card_title' => 'Pour les affaires',
+    'hero_card_text' => 'Une page marketing dédiée aux entreprises, avec des parcours ciblés et des visuels adaptés.',
+    'hero_image' => (new moodle_url('/theme/spacechild/pix/landing/course-product.svg'))->out(false),
+    'hero_image_alt' => 'Illustration équipes et entreprises',
     'cta_primary_label' => 'Demander une offre',
     'cta_primary_url' => $businessurl->out(false) . '#contact',
     'cta_secondary_label' => 'Voir les plans',
@@ -148,88 +163,10 @@ $ctx = [
             'text' => 'Accompagnement et réponses rapides.',
         ],
     ],
-    'hascategories' => true,
-    'categories' => [
-        [
-            'name' => 'Leadership & Management',
-            'meta' => 'Managers & équipes',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'management']))->out(false),
-        ],
-        [
-            'name' => 'Data & BI',
-            'meta' => 'Décisions pilotées',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'data']))->out(false),
-        ],
-        [
-            'name' => 'Gestion de projet',
-            'meta' => 'Agile & delivery',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'projet']))->out(false),
-        ],
-        [
-            'name' => 'Sales & Customer Success',
-            'meta' => 'Croissance & rétention',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'vente']))->out(false),
-        ],
-        [
-            'name' => 'RH & Talent',
-            'meta' => 'Onboarding & culture',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'rh']))->out(false),
-        ],
-        [
-            'name' => 'Finance & Compliance',
-            'meta' => 'Risques & conformité',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'compliance']))->out(false),
-        ],
-        [
-            'name' => 'Marketing B2B',
-            'meta' => 'Acquisition & pipeline',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'marketing']))->out(false),
-        ],
-        [
-            'name' => 'Cybersécurité',
-            'meta' => 'Sensibilisation & pratiques',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'securite']))->out(false),
-        ],
-    ],
-    'hascourses' => true,
-    'courses' => [
-        [
-            'title' => 'Leadership moderne',
-            'summary' => 'Motiver, aligner et piloter la performance.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'leadership']))->out(false),
-        ],
-        [
-            'title' => 'Dashboard & KPIs',
-            'summary' => 'Suivi de performance et reporting exécutif.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'kpi']))->out(false),
-        ],
-        [
-            'title' => 'Gestion de projet agile',
-            'summary' => 'Scrum, Kanban et delivery d’équipe.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'agile']))->out(false),
-        ],
-        [
-            'title' => 'Vente consultative',
-            'summary' => 'Structurer un cycle de vente B2B.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'vente']))->out(false),
-        ],
-        [
-            'title' => 'Onboarding efficace',
-            'summary' => 'Accélérer la montée en compétences.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'onboarding']))->out(false),
-        ],
-        [
-            'title' => 'Culture cyber',
-            'summary' => 'Sensibilisation et bonnes pratiques.',
-            'cta' => 'Voir le cours →',
-            'url' => (new moodle_url('/course/search.php', ['search' => 'securite']))->out(false),
-        ],
-    ],
+    'hascategories' => !empty($marketingcategories),
+    'categories' => $marketingcategories,
+    'hascourses' => !empty($marketingcourses),
+    'courses' => $marketingcourses,
     'hasprograms' => true,
     'programs' => [
         [

@@ -167,15 +167,11 @@
                 <img src="{{image}}" alt="{{title}}" loading="lazy">
               </div>
             {{/image}}
-            <div class="sc-card-provider">{{provider}}</div>
             <h3>{{title}}</h3>
             <p>{{summary}}</p>
-            <div class="sc-card-meta">
-              <span>Note {{rating}}</span>
-              <span>{{reviews}} avis</span>
-              <span>{{meta}}</span>
-            </div>
-            <a href="{{url}}">{{cta}} -></a>
+            {{#canrequest}}
+            <a class="sc-link" href="{{{enrolurl}}}" data-signup-modal>Demander l’inscription -></a>
+            {{/canrequest}}
           </article>
         {{/courses}}
       </div>
@@ -315,9 +311,11 @@
         <p>Créez votre compte et commencez un parcours en quelques minutes.</p>
       </div>
       <div class="sc-cta-actions">
-        <a class="sc-btn sc-btn--primary" href="{{signupurl}}">Créer un compte</a>
+        <a class="sc-btn sc-btn--primary" href="{{signupurl}}" data-signup-modal>Créer un compte</a>
         <a class="sc-btn sc-btn--secondary" href="{{loginurl}}">Se connecter</a>
       </div>
     </div>
   </section>
 </main>
+
+{{> theme_spacechild/spacechild/signup_modal }}
