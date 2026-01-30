@@ -263,6 +263,28 @@ $ctx = [
     'extra_html' => $pricing . $contact,
 ];
 
+$presencekeys = [
+    'campus_stats',
+    'government_stats',
+    'partners',
+    'goals',
+    'learning_paths',
+    'program_types',
+    'why_campus',
+    'university_use_cases',
+    'government_training_features',
+    'skills_tracks',
+    'government_solutions',
+    'career_benefits',
+    'detailed_testimonials',
+    'university_testimonials',
+    'government_case_studies',
+];
+
+foreach ($presencekeys as $key) {
+    $ctx['has' . $key] = !empty($ctx[$key]);
+}
+
 echo $OUTPUT->header();
 echo $OUTPUT->render_from_template('theme_spacechild/audience', $ctx);
 echo $OUTPUT->footer();

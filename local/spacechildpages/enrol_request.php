@@ -2,6 +2,7 @@
 require_once('../../config.php');
 
 use local_spacechildpages\form\enrol_request_form;
+use core_course_category;
 
 require_once($CFG->dirroot . '/local/spacechildpages/classes/form/enrol_request_form.php');
 
@@ -21,10 +22,11 @@ $PAGE->set_pagelayout('embedded');
 $PAGE->set_title(get_string('enrolrequest:title', 'local_spacechildpages'));
 $PAGE->set_heading(get_string('enrolrequest:title', 'local_spacechildpages'));
 $PAGE->add_body_class('sc-enrol-request');
+$PAGE->requires->css(new moodle_url('/local/spacechildpages/style/enrol_request.css'));
 
 $logourl = $PAGE->theme->setting_file_url('logo', 'logo');
 if (empty($logourl)) {
-    $logourl = (new moodle_url('/theme/spacechild/images/qualisys-logo.svg'))->out(false);
+    $logourl = (new moodle_url('/theme/spacechild/images/LOGO.png'))->out(false);
 }
 $sitename = format_string($SITE->shortname ?: $SITE->fullname);
 
@@ -52,14 +54,39 @@ if (isloggedin() && !isguestuser()) {
     }
 }
 
+$courseoptions = [];
+$courses = core_course_category::top()->get_courses([
+    'recursive' => true,
+    'sort' => ['fullname' => 1],
+]);
+foreach ($courses as $courseitem) {
+    if ((int)$courseitem->id === SITEID) {
+        continue;
+    }
+    $courseoptions[$courseitem->id] = format_string($courseitem->fullname);
+}
+if ($course && !isset($courseoptions[$course->id])) {
+    $courseoptions[$course->id] = format_string($course->fullname);
+}
+
 $mform = new enrol_request_form(null, [
     'courseid' => $courseid,
+    'courses' => $courseoptions,
+    'course_locked' => !empty($courseid),
     'defaults' => $defaults,
 ]);
 
 if ($data = $mform->get_data()) {
+    $selectedcourse = null;
+    if (!empty($data->courseid)) {
+        $selectedcourse = $DB->get_record('course', ['id' => (int)$data->courseid], '*', IGNORE_MISSING);
+        if (empty($selectedcourse) || (int)$selectedcourse->id === SITEID) {
+            $selectedcourse = null;
+        }
+    }
+
     $record = (object) [
-        'courseid' => (int)$data->courseid,
+        'courseid' => $selectedcourse ? (int)$selectedcourse->id : 0,
         'userid' => (isloggedin() && !isguestuser()) ? (int)$USER->id : 0,
         'fullname' => trim((string)$data->fullname),
         'email' => trim((string)$data->email),
@@ -77,7 +104,7 @@ if ($data = $mform->get_data()) {
     $admin = get_admin();
     $support = \core_user::get_support_user();
     $subject = get_string('enrolrequest:email_subject', 'local_spacechildpages');
-    $coursename = $course ? format_string($course->fullname) : get_string('enrolrequest:nocourse', 'local_spacechildpages');
+    $coursename = $selectedcourse ? format_string($selectedcourse->fullname) : get_string('enrolrequest:nocourse', 'local_spacechildpages');
     $manageurl = (new moodle_url('/local/spacechildpages/enrol_requests.php'))->out(false);
 
     $message = get_string('enrolrequest:email_body', 'local_spacechildpages', (object) [

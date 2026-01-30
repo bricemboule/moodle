@@ -14,7 +14,8 @@ $string['confirmdeletecategory'] = 'Delete category "{$a}"?';
 $string['confirmdeletecourse'] = 'Delete course "{$a}"?';
 $string['categoryname'] = 'Name';
 $string['categorymeta'] = 'Meta';
-$string['categoryimage'] = 'Image URL';
+$string['categoryimage'] = 'Image';
+$string['categoryimageurl'] = 'Image URL (optional)';
 $string['categoryurl'] = 'Link URL';
 $string['coursetitle'] = 'Course name';
 $string['coursedescription'] = 'Short description';
@@ -68,10 +69,27 @@ $string['enrolrequest:missingtable'] = 'Enrollment requests table is missing. Ru
 $string['enrolrequest:approved_enrolled'] = 'Request approved and user enrolled.';
 $string['enrolrequest:approved_already'] = 'Request approved. User already enrolled.';
 $string['enrolrequest:approved_noenrol'] = 'Request approved. No enrolment done.';
+$string['enrolrequest:approved_subject'] = 'Your enrolment request on {$a} has been approved';
+$string['enrolrequest:approved_body'] = 'Hello {$a->fullname},' . "\n\n"
+    . 'Your enrolment request has been approved.' . "\n\n"
+    . 'Course: {$a->course}' . "\n"
+    . 'Course access: {$a->courseurl}' . "\n\n"
+    . 'Login details:' . "\n"
+    . 'Login URL: {$a->loginurl}' . "\n"
+    . 'Username: {$a->username}' . "\n"
+    . 'Email: {$a->email}' . "\n\n"
+    . 'Password: If you already have a password, use it. If not, check your email for the password setup message.' . "\n"
+    . 'Forgot it? {$a->forgoturl}' . "\n\n"
+    . 'Thanks,' . "\n"
+    . '{$a->sitename}' . "\n";
+$string['enrolrequest:user_notfound'] = 'No user account found for this email: {$a}';
 $string['enrolrequest:manual_missing'] = 'Manual enrolment plugin is disabled.';
 $string['enrolrequest:manual_instance_missing'] = 'No manual enrolment instance is enabled for this course.';
 $string['field_fullname'] = 'Full name';
 $string['field_email'] = 'Email';
+$string['field_course'] = 'Course';
+$string['field_course_select'] = 'Select a course';
+$string['field_course_required'] = 'Please select a course.';
 $string['field_phone'] = 'Phone';
 $string['field_organisation'] = 'Organisation';
 $string['field_position'] = 'Position';

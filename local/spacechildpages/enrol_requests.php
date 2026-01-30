@@ -2,6 +2,8 @@
 require_once('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->libdir . '/enrollib.php');
+require_once($CFG->dirroot . '/login/lib.php');
+require_once($CFG->dirroot . '/user/lib.php');
 
 admin_externalpage_setup('local_spacechildpages_enrolrequests');
 
@@ -69,10 +71,97 @@ if (!empty($action) && !empty($id)) {
                 $enrolerror = '';
                 $enrolmessage = '';
 
-                if (!empty($request->courseid) && !empty($request->userid)) {
+                $course = null;
+                if (!empty($request->courseid)) {
                     $course = $DB->get_record('course', ['id' => $request->courseid], 'id,fullname', IGNORE_MISSING);
-                    $user = $DB->get_record('user', ['id' => $request->userid, 'deleted' => 0], 'id', IGNORE_MISSING);
+                }
 
+                $user = null;
+                if (!empty($request->userid)) {
+                    $user = $DB->get_record('user', ['id' => $request->userid, 'deleted' => 0], 'id', IGNORE_MISSING);
+                }
+                if (!$user && !empty($request->email)) {
+                    $matched = \core_user::get_user_by_email($request->email, 'id,deleted', null, IGNORE_MISSING);
+                    if ($matched && empty($matched->deleted)) {
+                        $user = $matched;
+                        $request->userid = (int)$matched->id;
+                        $DB->update_record('local_spacechildpages_enrolreq', $request);
+                    }
+                }
+
+                if (!$user && !empty($request->email)) {
+                    $email = clean_param($request->email, PARAM_EMAIL);
+                    if ($email !== '') {
+                        $fullname = trim((string)$request->fullname);
+                        $firstname = '';
+                        $lastname = '';
+
+                        if ($fullname !== '') {
+                            $parts = preg_split('/\s+/', $fullname, -1, PREG_SPLIT_NO_EMPTY);
+                            $firstname = (string)array_shift($parts);
+                            $lastname = trim(implode(' ', $parts));
+                        }
+
+                        if ($firstname === '' || $lastname === '') {
+                            $localpart = preg_replace('/@.*$/', '', $email);
+                            $nameparts = preg_split('/[._-]+/', (string)$localpart, -1, PREG_SPLIT_NO_EMPTY);
+                            if ($firstname === '' && !empty($nameparts)) {
+                                $firstname = (string)array_shift($nameparts);
+                            }
+                            if ($lastname === '' && !empty($nameparts)) {
+                                $lastname = trim(implode(' ', $nameparts));
+                            }
+                        }
+
+                        $firstname = trim($firstname);
+                        $lastname = trim($lastname);
+                        if ($firstname === '') {
+                            $firstname = 'User';
+                        }
+                        if ($lastname === '') {
+                            $lastname = $firstname;
+                        }
+
+                        $baseusername = preg_replace('/@.*$/', '', core_text::strtolower($email));
+                        $baseusername = core_user::clean_field($baseusername, 'username');
+                        if ($baseusername === '') {
+                            $baseusername = 'user';
+                        }
+                        $username = $baseusername;
+                        $suffix = 0;
+                        while ($DB->record_exists('user', ['username' => $username, 'mnethostid' => $CFG->mnet_localhost_id])) {
+                            $suffix++;
+                            $username = $baseusername . $suffix;
+                        }
+
+                        try {
+                            $newuser = new stdClass();
+                            $newuser->auth = 'manual';
+                            $newuser->confirmed = 1;
+                            $newuser->mnethostid = $CFG->mnet_localhost_id;
+                            $newuser->username = $username;
+                            $newuser->firstname = $firstname;
+                            $newuser->lastname = $lastname;
+                            $newuser->email = $email;
+                            $newuser->password = generate_password(12);
+
+                            $newuserid = user_create_user($newuser, true, true);
+                            $user = \core_user::get_user($newuserid, '*', IGNORE_MISSING);
+                            if ($user) {
+                                $request->userid = (int)$user->id;
+                                $DB->update_record('local_spacechildpages_enrolreq', $request);
+                                if (!empty($user->email) && validate_email($user->email)) {
+                                    $resetrecord = core_login_generate_password_reset($user);
+                                    send_password_change_confirmation_email($user, $resetrecord);
+                                }
+                            }
+                        } catch (Exception $e) {
+                            $enrolerror = $e->getMessage();
+                        }
+                    }
+                }
+
+                if ($enrolerror === '') {
                     if ($course && $user) {
                         $context = context_course::instance($course->id);
                         if (!is_enrolled($context, $user->id, '', true)) {
@@ -110,10 +199,13 @@ if (!empty($action) && !empty($id)) {
                             $enrolmessage = get_string('enrolrequest:approved_already', 'local_spacechildpages');
                         }
                     } else {
-                        $enrolmessage = get_string('enrolrequest:approved_noenrol', 'local_spacechildpages');
+                        if (!$course) {
+                            $enrolmessage = get_string('enrolrequest:approved_noenrol', 'local_spacechildpages');
+                        } else {
+                            $emailhint = !empty($request->email) ? $request->email : '-';
+                            $enrolerror = get_string('enrolrequest:user_notfound', 'local_spacechildpages', $emailhint);
+                        }
                     }
-                } else {
-                    $enrolmessage = get_string('enrolrequest:approved_noenrol', 'local_spacechildpages');
                 }
 
                 if ($enrolerror !== '') {
@@ -129,6 +221,30 @@ if (!empty($action) && !empty($id)) {
                 $request->timemodified = time();
                 $DB->update_record('local_spacechildpages_enrolreq', $request);
                 $message = $enrolmessage !== '' ? $enrolmessage : $message;
+
+                if ($user && !empty($user->email) && validate_email($user->email)) {
+                    $sitename = format_string($SITE->shortname ?: $SITE->fullname);
+                    $coursename = $course ? format_string($course->fullname) : get_string('enrolrequest:nocourse', 'local_spacechildpages');
+                    $courseurl = $course
+                        ? (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false)
+                        : (new moodle_url('/course/index.php'))->out(false);
+
+                    $emaildata = (object) [
+                        'fullname' => format_string($request->fullname),
+                        'sitename' => $sitename,
+                        'course' => $coursename,
+                        'courseurl' => $courseurl,
+                        'loginurl' => (new moodle_url('/login/index.php'))->out(false),
+                        'forgoturl' => (new moodle_url('/login/forgot_password.php'))->out(false),
+                        'username' => $user->username,
+                        'email' => $user->email,
+                    ];
+
+                    $subject = get_string('enrolrequest:approved_subject', 'local_spacechildpages', $sitename);
+                    $body = get_string('enrolrequest:approved_body', 'local_spacechildpages', $emaildata);
+                    $support = \core_user::get_support_user();
+                    email_to_user($user, $support, $subject, $body);
+                }
             } else {
                 $request->status = 'rejected';
                 $request->timemodified = time();

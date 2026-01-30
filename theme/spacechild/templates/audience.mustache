@@ -1,256 +1,563 @@
-<div class="cs-landing cs-landing--full {{#hastoplinks}}has-topstrip{{/hastoplinks}}">
+<!-- ============================================
+     PAGE AUDIENCE - STYLE COURSERA COMPLET
+     Basé sur les vraies pages coursera.org
+     ============================================ -->
 
-  <!-- Top strip -->
+<div class="sc-landing sc-landing--full {{#hastoplinks}}has-topstrip{{/hastoplinks}}">
+
+  <!-- Top Strip -->
   {{#hastoplinks}}
-  <div class="cs-topstrip">
-    <div class="cs-container cs-topstrip__inner">
-      <nav class="cs-topstrip__nav" aria-label="Menu haut">
-        {{#toplinks}}
-          <a class="cs-topstrip__link {{#active}}is-active{{/active}}" href="{{{url}}}">
-            {{label}}
-          </a>
-        {{/toplinks}}
-      </nav>
+  <div class="sc-topbar">
+    <div class="sc-container sc-topbar-inner">
+      <span class="sc-topbar-label">Solutions</span>
+      {{#toplinks}}
+        <a href="{{{url}}}" {{#active}}class="is-active"{{/active}}>{{label}}</a>
+      {{/toplinks}}
     </div>
   </div>
   {{/hastoplinks}}
 
-  <!-- Header -->
-  <header class="cs-topbar">
-    <div class="cs-container">
-      <div class="cs-brand cs-animate-left">
-        <a class="cs-brand__logo" href="{{{config.wwwroot}}}">
-          <img src="{{{config.wwwroot}}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
-          <span class="cs-brand__tagline">training</span>
-        </a>
-      </div>
-
-      <nav class="cs-nav cs-animate-right">
-        <a class="cs-nav__link" href="{{{config.wwwroot}}}/course/index.php">Explorer</a>
-        <a class="cs-nav__btn cs-btn cs-btn--ghost" href="{{{config.wwwroot}}}/login/index.php">Connexion</a>
-        <a class="cs-nav__btn cs-btn cs-btn--primary" href="{{{signupurl}}}" data-signup-modal>S’inscrire</a>
+  <!-- Navigation -->
+  <header class="sc-nav">
+    <div class="sc-container sc-nav-inner">
+      <a class="sc-logo" href="{{config.wwwroot}}">
+        <img class="sc-logo-image" src="{{config.wwwroot}}/theme/spacechild/images/LOGO.png" alt="{{sitename}}">
+      </a>
+      <a class="sc-nav-link" href="{{config.wwwroot}}/course/index.php">Explorer</a>
+      <form class="sc-nav-search" action="{{config.wwwroot}}/course/search.php" method="get" role="search">
+        <label class="sc-visually-hidden" for="audience-search">Rechercher</label>
+        <input id="audience-search" type="text" name="search" placeholder="Rechercher une formation..." aria-label="Recherche">
+        <button type="submit" aria-label="Rechercher">Rechercher</button>
+      </form>
+      <nav class="sc-nav-actions" aria-label="Actions">
+        <a class="sc-link" href="{{{loginurl}}}">Connexion</a>
+        <a class="sc-btn sc-btn--signup" href="{{{signupurl}}}" data-signup-modal>Inscription</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="cs-hero cs-animate">
-    <div class="cs-container cs-hero__grid">
-      <div class="cs-hero__content cs-stagger cs-animate-left">
-        <h1>{{hero_title}}</h1>
-        <p class="cs-lead">{{hero_subtitle}}</p>
-
-        <div class="cs-ctaRow">
-          <a class="cs-btn cs-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
-          <a class="cs-btn cs-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
-        </div>
-      </div>
-
-      <div class="cs-hero__visual">
-        <div class="cs-visual-card cs-animate-right">
-          {{#hero_badge}}
-          <div class="cs-visual-card__badge">{{hero_badge}}</div>
-          {{/hero_badge}}
-          {{#hero_card_title}}
-          <h3>{{hero_card_title}}</h3>
-          {{/hero_card_title}}
-          {{#hero_card_text}}
-          <p>{{hero_card_text}}</p>
-          {{/hero_card_text}}
-          {{#hero_image}}
-          <div class="cs-visual-card__media">
-            <img src="{{hero_image}}" alt="{{hero_image_alt}}">
+  <section class="sc-hero" aria-labelledby="hero-title">
+    <div class="sc-container">
+      <div class="sc-hero-grid {{#hero_align_top}}sc-hero-grid--top{{/hero_align_top}}">
+        <div class="sc-hero-copy {{#hero_justify}}sc-hero-copy--justify{{/hero_justify}}">
+          <span class="sc-eyebrow">{{page_title}}</span>
+          <h1 id="hero-title" class="{{#hero_title_small}}sc-hero-title--sm{{/hero_title_small}}">{{hero_title}}</h1>
+          <p>{{hero_subtitle}}</p>
+          <div class="sc-hero-actions">
+            {{#cta_primary_label}}
+            <a class="sc-btn sc-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
+            {{/cta_primary_label}}
+            <a class="sc-btn sc-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
           </div>
-          {{/hero_image}}
         </div>
+        {{#hero_image}}
+          {{#hero_image_full}}
+          <div class="sc-hero-panel sc-animate">
+            <div class="sc-hero-media">
+              <img class="sc-hero-media__img" src="{{hero_image}}" alt="{{hero_image_alt}}" loading="lazy">
+            </div>
+          </div>
+          {{/hero_image_full}}
+          {{^hero_image_full}}
+          <div class="sc-hero-panel">
+            <div class="sc-feature-card sc-animate">
+              <div class="sc-card-media">
+                <img src="{{hero_image}}" alt="{{hero_image_alt}}" loading="lazy">
+              </div>
+            </div>
+          </div>
+          {{/hero_image_full}}
+        {{/hero_image}}
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Ce que vous obtenez</h2>
-      </div>
-
-      <div class="cs-grid cs-grid--3 cs-stagger">
-        {{#features}}
-          <div class="cs-card">
-            <div class="cs-card__title">{{title}}</div>
-            <div class="cs-card__meta">{{text}}</div>
-          </div>
-        {{/features}}
+  <!-- Stats Hero (People/Universities/Governments) -->
+  {{#hascampus_stats}}
+  <section class="sc-section sc-section--soft" aria-labelledby="stats-title">
+    <div class="sc-container">
+      <div class="sc-outcomes sc-stagger">
+        {{#campus_stats}}
+        <div class="sc-outcome">
+          <div class="sc-outcome-value">{{value}}</div>
+          <div class="sc-outcome-label">{{label}}</div>
+        </div>
+        {{/campus_stats}}
       </div>
     </div>
   </section>
+  {{/hascampus_stats}}
 
+  {{#hasgovernment_stats}}
+  <section class="sc-section sc-section--soft" aria-labelledby="stats-title">
+    <div class="sc-container">
+      <div class="sc-outcomes sc-stagger">
+        {{#government_stats}}
+        <div class="sc-outcome">
+          <div class="sc-outcome-value">{{value}}</div>
+          <div class="sc-outcome-label">{{label}}</div>
+        </div>
+        {{/government_stats}}
+      </div>
+    </div>
+  </section>
+  {{/hasgovernment_stats}}
+
+  <!-- Partenaires -->
+  {{#haspartners}}
+  <section class="sc-section" aria-labelledby="partners-title">
+    <div class="sc-container">
+      <h2 id="partners-title" style="text-align: center; margin-bottom: 2rem;">Nos partenaires</h2>
+      <div class="sc-logos-row" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: center;">
+        {{#partners}}
+        <span class="sc-logo-pill">{{name}}</span>
+        {{/partners}}
+      </div>
+    </div>
+  </section>
+  {{/haspartners}}
+
+  <!-- Objectifs / Goals (People) -->
+  {{#hasgoals}}
+  <section class="sc-section sc-section--alt" aria-labelledby="goals-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="goals-title">Qu'est-ce qui vous amène ici aujourd'hui ?</h2>
+        <p class="sc-section-sub">Choisissez votre objectif et découvrez les formations adaptées</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        {{#goals}}
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p>{{text}}</p>
+        </div>
+        {{/goals}}
+      </div>
+    </div>
+  </section>
+  {{/hasgoals}}
+
+  <!-- Learning Paths (People) -->
+  {{#haslearning_paths}}
+  <section class="sc-section" aria-labelledby="learning-paths-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="learning-paths-title">Ce que vous pouvez apprendre</h2>
+        <p class="sc-section-sub">Explorez nos domaines de formation les plus populaires</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#learning_paths}}
+        <a class="sc-card" href="{{{url}}}">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <small><strong>Cours populaires :</strong> {{popular_courses}}</small>
+          </div>
+        </a>
+        {{/learning_paths}}
+      </div>
+    </div>
+  </section>
+  {{/haslearning_paths}}
+
+  <!-- Program Types (People) -->
+  {{#hasprogram_types}}
+  <section class="sc-section sc-section--soft" aria-labelledby="program-types-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="program-types-title">Types de programmes disponibles</h2>
+        <p class="sc-section-sub">Choisissez le format qui correspond à vos besoins</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#program_types}}
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <span class="sc-card-tag">{{level}}</span>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <div><strong>Durée :</strong> {{duration}}</div>
+            <div><strong>Résultat :</strong> {{outcomes}}</div>
+            <div style="margin-top: 0.5rem;"><em>{{example}}</em></div>
+          </div>
+        </div>
+        {{/program_types}}
+      </div>
+    </div>
+  </section>
+  {{/hasprogram_types}}
+
+  <!-- Career Academy (Universities) -->
+  {{#career_academy}}
+  <section class="sc-section" aria-labelledby="career-academy-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="career-academy-title">{{title}}</h2>
+        <p class="sc-section-sub">{{subtitle}}</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        {{#benefits}}
+        <div class="sc-card">
+          <p>✓ {{.}}</p>
+        </div>
+        {{/benefits}}
+      </div>
+    </div>
+  </section>
+  {{/career_academy}}
+
+  <!-- Why Campus (Universities) -->
+  {{#haswhy_campus}}
+  <section class="sc-section sc-section--soft" aria-labelledby="why-campus-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="why-campus-title">Pourquoi nous choisir</h2>
+        <p class="sc-section-sub">Des outils puissants pour transformer l'apprentissage</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        {{#why_campus}}
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+        </div>
+        {{/why_campus}}
+      </div>
+    </div>
+  </section>
+  {{/haswhy_campus}}
+
+  <!-- University Use Cases (Universities) -->
+  {{#hasuniversity_use_cases}}
+  <section class="sc-section" aria-labelledby="use-cases-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="use-cases-title">Comment les universités utilisent notre plateforme</h2>
+        <p class="sc-section-sub">Des cas d'usage concrets et des résultats mesurables</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#university_use_cases}}
+        <article class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <span class="sc-card-tag">Cas d'usage</span>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <div><strong>Exemple :</strong> {{example}}</div>
+            <div style="margin-top: 0.5rem;"><strong>Résultat :</strong> {{result}}</div>
+          </div>
+        </article>
+        {{/university_use_cases}}
+      </div>
+    </div>
+  </section>
+  {{/hasuniversity_use_cases}}
+
+  <!-- High Quality Content (Governments) -->
+  {{#high_quality_content}}
+  <section class="sc-section sc-section--soft" aria-labelledby="content-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="content-title">{{title}}</h2>
+        <p class="sc-section-sub">{{subtitle}}</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        {{#benefits}}
+        <div class="sc-card">
+          <p>✓ {{.}}</p>
+        </div>
+        {{/benefits}}
+      </div>
+    </div>
+  </section>
+  {{/high_quality_content}}
+
+  <!-- Government Training Features (Governments) -->
+  {{#hasgovernment_training_features}}
+  <section class="sc-section" aria-labelledby="training-features-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="training-features-title">Formation gouvernementale bâtie pour l'impact</h2>
+        <p class="sc-section-sub">Développez des compétences recherchées avec du contenu engageant</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        {{#government_training_features}}
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+        </div>
+        {{/government_training_features}}
+      </div>
+    </div>
+  </section>
+  {{/hasgovernment_training_features}}
+
+  <!-- Skills Tracks (Governments) -->
+  {{#hasskills_tracks}}
+  <section class="sc-section sc-section--alt" aria-labelledby="skills-tracks-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="skills-tracks-title">Choisissez le Skills Track adapté à vos besoins</h2>
+        <p class="sc-section-sub">Parcours d'apprentissage ciblés pour équiper fonctionnaires et citoyens</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#skills_tracks}}
+        <a class="sc-card" href="{{{url}}}">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p style="font-weight: 600; color: var(--sc-accent); margin: 0.5rem 0;">{{subtitle}}</p>
+          <p>{{description}}</p>
+          <span class="sc-link" style="margin-top: auto; display: inline-block;">Explorer →</span>
+        </a>
+        {{/skills_tracks}}
+      </div>
+    </div>
+  </section>
+  {{/hasskills_tracks}}
+
+  <!-- Government Solutions (Governments) -->
+  {{#hasgovernment_solutions}}
+  <section class="sc-section" aria-labelledby="gov-solutions-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="gov-solutions-title">Solutions pour le secteur public</h2>
+        <p class="sc-section-sub">Transformez votre organisation avec des formations adaptées</p>
+      </div>
+      <div class="sc-grid sc-grid--programs sc-stagger">
+        {{#government_solutions}}
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{icon}}</div>
+          <h3>{{title}}</h3>
+          <p>{{description}}</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            {{#features}}
+            <div>✓ {{.}}</div>
+            {{/features}}
+          </div>
+        </div>
+        {{/government_solutions}}
+      </div>
+    </div>
+  </section>
+  {{/hasgovernment_solutions}}
+
+  <!-- Catégories -->
   {{#hascategories}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Catégories populaires</h2>
-        <a class="cs-link" href="{{{config.wwwroot}}}/course/index.php">Tout voir →</a>
+  <section class="sc-section" aria-labelledby="categories-title">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2 id="categories-title">Explorez par catégorie</h2>
+        <a class="sc-link" href="{{config.wwwroot}}/course/index.php">Voir toutes →</a>
       </div>
-      <div class="cs-grid cs-grid--4 cs-stagger">
+      <div class="sc-grid sc-grid--categories sc-stagger">
         {{#categories}}
-          <a class="cs-card" href="{{{url}}}">
-            <div class="cs-card__title">{{name}}</div>
-            <div class="cs-card__meta">{{meta}}</div>
-          </a>
+        <a class="sc-card" href="{{{url}}}">
+          {{#image}}
+          <div class="sc-card-media">
+            <img src="{{{image}}}" alt="{{name}}" loading="lazy">
+          </div>
+          {{/image}}
+          <h3>{{name}}</h3>
+          <p>{{meta}}</p>
+        </a>
         {{/categories}}
       </div>
     </div>
   </section>
   {{/hascategories}}
 
+  <!-- Cours -->
   {{#hascourses}}
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Cours recommandés</h2>
-        <a class="cs-link" href="{{{config.wwwroot}}}/course/search.php">Voir tout →</a>
+  <section class="sc-section sc-section--soft" aria-labelledby="courses-title">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2 id="courses-title">Cours populaires</h2>
+        <a class="sc-link" href="{{config.wwwroot}}/course/search.php">Voir tous →</a>
       </div>
-      <div class="cs-grid cs-grid--4 cs-stagger">
+      <div class="sc-grid sc-grid--courses sc-stagger">
         {{#courses}}
-          <article class="cs-course">
-            <div class="cs-course__thumb">
-              {{#image}}
-                <img src="{{{image}}}" alt="{{title}}" loading="lazy">
-              {{/image}}
-              {{^image}}
-                <div class="cs-course__thumbInner"></div>
-              {{/image}}
-            </div>
-            <div class="cs-course__body">
-              <div class="cs-course__title">{{title}}</div>
-              <div class="cs-course__summary">{{summary}}</div>
-              {{#canrequest}}
-              <a class="cs-course__cta" href="{{{enrolurl}}}" data-signup-modal>Demander l’inscription →</a>
-              {{/canrequest}}
-            </div>
-          </article>
+        <article class="sc-card">
+          {{#image}}
+          <div class="sc-card-media">
+            <img src="{{{image}}}" alt="{{title}}" loading="lazy">
+          </div>
+          {{/image}}
+          <span class="sc-card-tag">Formation</span>
+          <h3>{{title}}</h3>
+          <p>{{summary}}</p>
+          {{#canrequest}}
+          <a class="sc-link" href="{{{enrolurl}}}" data-signup-modal>S'inscrire →</a>
+          {{/canrequest}}
+        </article>
         {{/courses}}
       </div>
     </div>
   </section>
   {{/hascourses}}
 
-  {{#hasprograms}}
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Programmes recommandés</h2>
+  <!-- Career Benefits (People) -->
+  {{#hascareer_benefits}}
+  <section class="sc-section" aria-labelledby="career-benefits-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="career-benefits-title">Des résultats carrière prouvés</h2>
+        <p class="sc-section-sub">Les statistiques parlent d'elles-mêmes</p>
       </div>
-      <div class="cs-grid cs-grid--3 cs-stagger">
-        {{#programs}}
-          <article class="cs-card cs-card--program">
-            <div class="cs-card__eyebrow">{{tag}}</div>
-            <div class="cs-card__title">{{title}}</div>
-            <div class="cs-card__meta">{{summary}}</div>
-            <div class="cs-card__meta">{{details}}</div>
-            <a class="cs-link" href="{{{url}}}">{{cta}}</a>
-          </article>
-        {{/programs}}
-      </div>
-    </div>
-  </section>
-  {{/hasprograms}}
-
-  {{#hasoutcomes}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Résultats observés</h2>
-      </div>
-      <div class="cs-outcomes cs-stagger">
-        {{#outcomes}}
-          <div class="cs-outcome">
-            <div class="cs-outcome__value">{{value}}</div>
-            <div class="cs-outcome__label">{{label}}</div>
-          </div>
-        {{/outcomes}}
+      <div class="sc-outcomes sc-stagger">
+        {{#career_benefits}}
+        <div class="sc-outcome">
+          <div class="sc-outcome-value">{{stat}}</div>
+          <div class="sc-outcome-label">{{title}}</div>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem; color: var(--sc-text-light);">{{description}}</p>
+        </div>
+        {{/career_benefits}}
       </div>
     </div>
   </section>
-  {{/hasoutcomes}}
+  {{/hascareer_benefits}}
 
+  <!-- Comment ça marche -->
   {{#hassteps}}
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Comment ça marche</h2>
+  <section class="sc-section sc-section--soft" aria-labelledby="steps-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="steps-title">Comment ça marche</h2>
+        <p class="sc-section-sub">Un processus simple et efficace</p>
       </div>
-      <div class="cs-steps cs-stagger">
+      <div class="sc-steps sc-stagger">
         {{#steps}}
-          <div class="cs-step">
-            <div class="cs-step__number">{{number}}</div>
-            <div class="cs-step__title">{{title}}</div>
-            <div class="cs-step__text">{{text}}</div>
-          </div>
+        <div class="sc-step">
+          <div class="sc-step-number">{{number}}</div>
+          <h3>{{title}}</h3>
+          <p>{{text}}</p>
+        </div>
         {{/steps}}
       </div>
     </div>
   </section>
   {{/hassteps}}
 
-  {{#hascasestudies}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Études de cas</h2>
+  <!-- Témoignages détaillés (People) -->
+  {{#hasdetailed_testimonials}}
+  <section class="sc-section" aria-labelledby="testimonials-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="testimonials-title">Pourquoi les apprenants nous choisissent</h2>
+        <p class="sc-section-sub">Des histoires de transformation inspirantes</p>
       </div>
-      <div class="cs-grid cs-grid--3 cs-stagger">
-        {{#casestudies}}
-          <article class="cs-card cs-card--case">
-            <div class="cs-card__title">{{title}}</div>
-            <div class="cs-card__meta">{{text}}</div>
-            <div class="cs-card__meta"><strong>{{result}}</strong></div>
-          </article>
-        {{/casestudies}}
+      <div class="sc-grid sc-grid--testimonials sc-stagger">
+        {{#detailed_testimonials}}
+        <article class="sc-card">
+          <p>"{{quote}}"</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <div><strong>{{name}}</strong> - {{role}}</div>
+            <div style="font-size: 0.875rem; color: var(--sc-text-light);">{{previous_role}}</div>
+            <div style="margin-top: 0.5rem; font-weight: 600; color: var(--sc-primary);">{{outcome}}</div>
+          </div>
+        </article>
+        {{/detailed_testimonials}}
       </div>
     </div>
   </section>
-  {{/hascasestudies}}
+  {{/hasdetailed_testimonials}}
 
-  {{#hasfaq}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Questions fréquentes</h2>
+  <!-- Témoignages universités (Universities) -->
+  {{#hasuniversity_testimonials}}
+  <section class="sc-section" aria-labelledby="uni-testimonials-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="uni-testimonials-title">Ce que disent nos partenaires universitaires</h2>
+        <p class="sc-section-sub">Des témoignages de leaders de l'enseignement supérieur</p>
       </div>
-      <div class="cs-faq cs-stagger">
+      <div class="sc-grid sc-grid--testimonials sc-stagger">
+        {{#university_testimonials}}
+        <article class="sc-card">
+          <p>"{{quote}}"</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <div><strong>{{name}}</strong></div>
+            <div style="font-size: 0.875rem; color: var(--sc-text-light);">{{title}}</div>
+            <div style="margin-top: 0.5rem; font-weight: 600; color: var(--sc-primary);">{{university}}</div>
+          </div>
+        </article>
+        {{/university_testimonials}}
+      </div>
+    </div>
+  </section>
+  {{/hasuniversity_testimonials}}
+
+  <!-- Cas clients gouvernement (Governments) -->
+  {{#hasgovernment_case_studies}}
+  <section class="sc-section sc-section--alt" aria-labelledby="gov-cases-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="gov-cases-title">Études de cas gouvernementales</h2>
+        <p class="sc-section-sub">Comment nous transformons le secteur public</p>
+      </div>
+      <div class="sc-grid sc-grid--testimonials sc-stagger">
+        {{#government_case_studies}}
+        <article class="sc-card">
+          <span class="sc-card-tag">Success Story</span>
+          <h3>{{client}}</h3>
+          <p><strong>Défi :</strong> {{challenge}}</p>
+          <p><strong>Solution :</strong> {{solution}}</p>
+          <div class="sc-card-meta" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sc-border);">
+            <strong>Résultats :</strong>
+            {{#results}}
+            <div>✓ {{.}}</div>
+            {{/results}}
+          </div>
+        </article>
+        {{/government_case_studies}}
+      </div>
+    </div>
+  </section>
+  {{/hasgovernment_case_studies}}
+
+  <!-- FAQ -->
+  {{#hasfaq}}
+  <section class="sc-section" aria-labelledby="faq-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="faq-title">Questions fréquentes</h2>
+        <p class="sc-section-sub">Trouvez rapidement les réponses à vos questions</p>
+      </div>
+      <div class="sc-faq sc-stagger">
         {{#faq}}
-          <details class="cs-faq__item">
-            <summary>{{question}}</summary>
-            <div class="cs-faq__answer">{{answer}}</div>
-          </details>
+        <details class="sc-faq-item">
+          <summary>{{question}}</summary>
+          <div class="sc-faq-answer">{{answer}}</div>
+        </details>
         {{/faq}}
       </div>
     </div>
   </section>
   {{/hasfaq}}
 
-  {{#extra_html}}
-    {{{extra_html}}}
-  {{/extra_html}}
-
+  <!-- CTA Final -->
   {{^hidecta}}
-  <!-- CTA -->
-  <section class="cs-cta">
-    <div class="cs-container cs-cta__box cs-animate-zoom">
-      <div>
-        <h2>Commencer maintenant</h2>
-        <p>Créez un compte et découvrez les cours disponibles.</p>
-      </div>
-      <div class="cs-cta__actions">
-        <a class="cs-btn cs-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
-        <a class="cs-btn cs-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
+  <section class="sc-cta" aria-labelledby="cta-title">
+    <div class="sc-container">
+      <div class="sc-cta-inner">
+        <div>
+          <h2 id="cta-title">Prêt à commencer ?</h2>
+          <p>Rejoignez des milliers d'apprenants et d'organisations qui transforment leur avenir avec nos formations.</p>
+        </div>
+        <div class="sc-cta-actions">
+          {{#cta_primary_label}}
+          <a class="sc-btn sc-btn--primary" href="{{{cta_primary_url}}}">{{cta_primary_label}}</a>
+          {{/cta_primary_label}}
+          <a class="sc-btn sc-btn--ghost" href="{{{cta_secondary_url}}}">{{cta_secondary_label}}</a>
+        </div>
       </div>
     </div>
   </section>
   {{/hidecta}}
 
+  <!-- Footer -->
   {{> theme_spacechild/spacechild/signup_modal }}
   {{> theme_spacechild/spacechild/landing_footer }}
 

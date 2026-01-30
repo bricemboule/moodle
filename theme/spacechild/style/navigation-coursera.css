@@ -1,0 +1,412 @@
+/* ============================================
+   NAVIGATION STYLE COURSERA - VERSION CORRIGÉE
+   Loupe visible + Pas d'espace entre nav et hero
+   ============================================ */
+
+/* Top Bar */
+.sc-topbar {
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.sc-topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.sc-topbar-label {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  color: var(--sc-text-light);
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--sc-border);
+}
+
+.sc-topbar a {
+  color: var(--sc-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  transition: all var(--sc-transition-fast);
+}
+
+.sc-topbar a:hover {
+  color: var(--sc-primary);
+  background: rgba(41, 118, 100, 0.06);
+}
+
+.sc-topbar a.is-active {
+  color: var(--sc-primary);
+  font-weight: 600;
+  background: rgba(41, 118, 100, 0.08);
+}
+
+/* Navigation principale */
+.sc-nav {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 46px;
+  z-index: 99;
+}
+
+.sc-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Logo */
+.sc-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--sc-text);
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: transform var(--sc-transition-fast);
+  flex-shrink: 0;
+}
+
+.sc-logo:hover {
+  transform: translateY(-1px);
+}
+
+.sc-logo-image {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+/* Lien Explorer */
+.sc-nav-link {
+  text-decoration: none;
+  color: var(--sc-text);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all var(--sc-transition-base);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sc-nav-link:hover {
+  color: var(--sc-primary);
+  background: rgba(41, 118, 100, 0.06);
+}
+
+/* Barre de recherche avec icône VISIBLE */
+.sc-nav-search,
+.sc-search {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  max-width: 500px;
+  padding: 0.625rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--sc-border);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all var(--sc-transition-base);
+}
+
+.sc-nav-search:focus-within,
+.sc-search:focus-within {
+  border-color: var(--sc-primary);
+  box-shadow:
+    0 0 0 3px rgba(41, 118, 100, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Icône loupe - STYLE CORRIGÉ POUR ÊTRE VISIBLE */
+.sc-search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #6b7280; /* Gris visible */
+  transition: color var(--sc-transition-base);
+}
+
+.sc-search-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sc-nav-search:focus-within .sc-search-icon,
+.sc-search:focus-within .sc-search-icon {
+  color: var(--sc-primary); /* Vert au focus */
+}
+
+/* Input */
+.sc-nav-search input,
+.sc-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.9375rem;
+  min-width: 0;
+  color: var(--sc-text);
+  font-weight: 500;
+}
+
+.sc-nav-search input::placeholder,
+.sc-search input::placeholder {
+  color: var(--sc-text-light);
+  font-weight: 400;
+}
+
+/* SUPPRIMER le bouton recherche */
+.sc-nav-search button,
+.sc-search button {
+  display: none !important;
+}
+
+/* Actions */
+.sc-nav-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sc-nav-actions .sc-link {
+  color: var(--sc-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all var(--sc-transition-base);
+}
+
+.sc-nav-actions .sc-link:hover {
+  color: var(--sc-primary);
+  background: rgba(41, 118, 100, 0.06);
+}
+
+/* Bouton Inscription */
+.sc-btn--signup {
+  background: linear-gradient(
+    135deg,
+    var(--sc-accent) 0%,
+    var(--sc-accent-light) 100%
+  );
+  color: #ffffff;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(181, 58, 61, 0.2);
+  transition: all var(--sc-transition-base);
+  white-space: nowrap;
+}
+
+.sc-btn--signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(181, 58, 61, 0.3);
+}
+
+/* ============================================
+   HERO - COLLÉ DIRECTEMENT À LA NAV
+   ============================================ */
+
+.sc-hero {
+  /* SUPPRIMER tout padding-top pour coller à la nav */
+  padding: 3rem 0 4rem; /* Padding bas seulement */
+  background:
+    radial-gradient(
+      ellipse 800px 400px at 15% 10%,
+      rgba(41, 118, 100, 0.12),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 600px 350px at 85% 0%,
+      rgba(181, 58, 61, 0.1),
+      transparent 65%
+    ),
+    linear-gradient(180deg, #ffffff 0%, var(--sc-bg) 100%);
+  position: relative;
+  overflow: hidden;
+  /* Pas de margin-top */
+  margin-top: 0;
+}
+
+/* SUPPRIMER tous les espaces entre nav et hero */
+.sc-nav + .sc-hero {
+  margin-top: 0 !important;
+  padding-top: 3rem !important;
+}
+
+/* ============================================
+   SECTIONS - Espacement cohérent
+   ============================================ */
+
+.sc-section {
+  padding: 4rem 0; /* Espacement régulier */
+}
+
+.sc-section--soft {
+  background: linear-gradient(180deg, var(--sc-soft) 0%, #ffffff 100%);
+}
+
+.sc-section--alt {
+  background: linear-gradient(180deg, #ffffff 0%, var(--sc-bg) 100%);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 980px) {
+  .sc-nav-inner {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .sc-nav-search,
+  .sc-search {
+    flex: 1 1 100%;
+    max-width: none;
+    order: 3;
+  }
+
+  .sc-nav-actions {
+    width: auto;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sc-topbar-inner {
+    gap: 0.5rem;
+  }
+
+  .sc-topbar-label {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--sc-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sc-logo-image {
+    height: 32px;
+  }
+
+  .sc-nav-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .sc-btn--signup {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .sc-hero {
+    padding: 2rem 0 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sc-nav-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .sc-nav-actions .sc-link,
+  .sc-btn--signup {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   FIXED HEADER
+   ============================================ */
+
+.path-local-spacechildpages .cs-landing.has-topstrip,
+.frontpage-landing .cs-landing.has-topstrip {
+  --sc-topbar-height: 46px;
+  --sc-nav-height: 68px;
+  padding-top: calc(var(--sc-topbar-height) + var(--sc-nav-height));
+}
+
+.path-local-spacechildpages .cs-landing.has-topstrip .sc-topbar,
+.frontpage-landing .cs-landing.has-topstrip .sc-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.path-local-spacechildpages .cs-landing.has-topstrip .sc-nav,
+.frontpage-landing .cs-landing.has-topstrip .sc-nav {
+  position: fixed;
+  top: var(--sc-topbar-height);
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+/* ============================================
+   ACCESSIBILITÉ
+   ============================================ */
+
+.sc-visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

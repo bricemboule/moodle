@@ -1,6 +1,7 @@
 <?php
 require_once('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->libdir . '/filelib.php');
 require_once($CFG->dirroot . '/local/spacechildpages/classes/form/marketing_category_form.php');
 
 admin_externalpage_setup('local_spacechildpages_mcategories');
@@ -18,11 +19,30 @@ if ($id) {
     $record = $DB->get_record('local_spacechildpages_mcategories', ['id' => $id], '*', MUST_EXIST);
 }
 
-$mform = new \local_spacechildpages\form\marketing_category_form();
+$filemanageroptions = [
+    'maxbytes' => 0,
+    'maxfiles' => 1,
+    'subdirs' => 0,
+    'accepted_types' => ['image'],
+];
 
-if ($record) {
-    $mform->set_data($record);
-}
+$mform = new \local_spacechildpages\form\marketing_category_form(null, [
+    'filemanageroptions' => $filemanageroptions,
+]);
+
+$draftitemid = file_get_submitted_draft_itemid('imagefile');
+file_prepare_draft_area(
+    $draftitemid,
+    $context->id,
+    'local_spacechildpages',
+    'marketingcategoryimage',
+    $record ? (int)$record->id : 0,
+    $filemanageroptions
+);
+
+$formdata = $record ? (object)$record : new stdClass();
+$formdata->imagefile = $draftitemid;
+$mform->set_data($formdata);
 
 if ($mform->is_cancelled()) {
     redirect(new moodle_url('/local/spacechildpages/marketing_categories.php'));
@@ -31,13 +51,26 @@ if ($mform->is_cancelled()) {
 if ($data = $mform->get_data()) {
     $now = time();
     $data->timemodified = $now;
+
+    $recorddata = clone $data;
+    unset($recorddata->imagefile);
+
     if ($record) {
-        $data->id = $record->id;
-        $DB->update_record('local_spacechildpages_mcategories', $data);
+        $recorddata->id = $record->id;
+        $DB->update_record('local_spacechildpages_mcategories', $recorddata);
     } else {
-        $data->timecreated = $now;
-        $DB->insert_record('local_spacechildpages_mcategories', $data);
+        $recorddata->timecreated = $now;
+        $recorddata->id = $DB->insert_record('local_spacechildpages_mcategories', $recorddata);
     }
+
+    file_save_draft_area_files(
+        $data->imagefile,
+        $context->id,
+        'local_spacechildpages',
+        'marketingcategoryimage',
+        $record ? (int)$record->id : (int)$recorddata->id,
+        $filemanageroptions
+    );
 
     redirect(
         new moodle_url('/local/spacechildpages/marketing_categories.php'),
