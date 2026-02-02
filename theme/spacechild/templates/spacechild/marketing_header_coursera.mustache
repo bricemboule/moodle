@@ -9,10 +9,9 @@
   {{#hastoplinks}}
   <div class="sc-topbar">
     <div class="sc-container sc-topbar-inner">
-      <span class="sc-topbar-label">Solutions</span>
-      {{#toplinks}}
-        <a href="{{{url}}}" {{#active}}class="is-active"{{/active}}>{{label}}</a>
-      {{/toplinks}}
+      <a href="{{peopleurl}}">Pour les personnes</a>
+      <a href="{{universitiesurl}}">Pour les universités</a>
+      <a href="{{governmentsurl}}">Pour les gouvernements</a>
     </div>
   </div>
   {{/hastoplinks}}
@@ -20,26 +19,26 @@
   <!-- Navigation -->
   <header class="sc-nav">
     <div class="sc-container sc-nav-inner">
-      <a class="sc-logo" href="{{config.wwwroot}}">
-        <img class="sc-logo-image" src="{{config.wwwroot}}/theme/spacechild/images/LOGO.png" alt="{{sitename}}">
+      <a class="sc-logo" href="{{wwwroot}}">
+        <img class="sc-logo-image" src="{{wwwroot}}/theme/spacechild/images/LOGO.png" alt="{{sitename}}">
       </a>
       
-      <a class="sc-nav-link" href="{{config.wwwroot}}/course/index.php">Explorer</a>
+      <a class="sc-nav-link" href="{{wwwroot}}/course/index.php">Explorer</a>
       
-      <form class="sc-nav-search" action="{{config.wwwroot}}/course/search.php" method="get" role="search">
-        <label class="sc-visually-hidden" for="audience-search">Que souhaitez-vous apprendre ?</label>
-        <span class="sc-search-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <form class="sc-nav-search" action="{{wwwroot}}/course/search.php" method="get" role="search">
+        <label class="sc-visually-hidden" for="sc-nav-search">Que souhaitez-vous apprendre ?</label>
+        <input id="sc-nav-search" type="text" name="search" placeholder="Que souhaitez-vous apprendre ?" aria-label="Que souhaitez-vous apprendre ?">
+        <button class="sc-search-btn" type="submit" aria-label="Rechercher">
+          <svg class="sc-search-btn__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
             <path d="M12.5 12.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-        </span>
-        <input  type="text" name="search" placeholder="Que souhaitez-vous apprendre ?" aria-label="Que souhaitez-vous apprendre ?">
+        </button>
       </form>
       
-      <nav class="sc-nav-actions" aria-label="Actions">
-        <a class="sc-link" href="{{{loginurl}}}">Connexion</a>
-        <a class="sc-btn sc-btn--signup" href="{{{signupurl}}}" data-signup-modal>Inscription</a>
+      <nav class="sc-nav-actions" aria-label="Actions utilisateur">
+        <a class="sc-link" href="{{{loginurl}}}" data-login-modal data-modal-title="Connexion">Connexion</a>
+        <a class="sc-btn sc-btn--signup" href="{{{signupurl}}}" data-signup-modal data-modal-title="Inscription">S'inscrire gratuitement</a>
       </nav>
     </div>
   </header>

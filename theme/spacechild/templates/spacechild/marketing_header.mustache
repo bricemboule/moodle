@@ -1,28 +1,55 @@
+<!-- ============================================
+     NAVIGATION COURSERA - TEMPLATE EXACT
+     Reproduction fidèle du design Coursera
+     ============================================ -->
+
+<!-- Top Bar - Barre "Solutions" -->
 <div class="sc-topbar">
   <div class="sc-container">
     <div class="sc-topbar-links">
-      <a href="{{peopleurl}}">Pour les personnes</a>
-      <a href="{{universitiesurl}}">Pour les universités</a>
-      <a href="{{governmentsurl}}">Pour les gouvernements</a>
+      <a href="{{peopleurl}}" {{#ispeopleactive}}class="active"{{/ispeopleactive}}>Pour les personnes</a>
+      <a href="{{universitiesurl}}" {{#isuniversitiesactive}}class="active"{{/isuniversitiesactive}}>Pour les universités</a>
+      <a href="{{governmentsurl}}" {{#isgovernmentsactive}}class="active"{{/isgovernmentsactive}}>Pour les gouvernements</a>
     </div>
   </div>
 </div>
 
-<header class="sc-nav">
-  <div class="sc-container sc-nav-inner">
-    <a class="sc-logo" href="{{wwwroot}}">
-      <span class="sc-logo-mark">S</span>
-      <span class="sc-logo-text">{{sitename}}</span>
+<!-- Navigation Principale -->
+<header class="sc-nav" role="banner">
+  <div class="sc-nav-inner">
+    <!-- Logo -->
+    <a class="sc-logo" href="{{config.wwwroot}}" aria-label="Retour à l'accueil">
+      <img class="sc-logo-image" src="{{config.wwwroot}}/theme/spacechild/images/LOGO.png" alt="{{sitename}}">
     </a>
 
-    <form class="sc-search" method="get" action="{{wwwroot}}/course/search.php">
-      <input type="text" name="search" placeholder="Que souhaitez-vous apprendre ?" aria-label="Que souhaiterez-vous apprendre ?">
-      <button type="submit" aria-label="Rechercher">🔍</button>
+    <!-- Lien Explorer -->
+    <a class="sc-nav-link" href="{{config.wwwroot}}/course/index.php">Explorer</a>
+
+    <!-- Barre de recherche -->
+    <form class="sc-search" action="{{config.wwwroot}}/course/search.php" method="get" role="search">
+      <!-- Input de recherche -->
+      <label class="sc-visually-hidden" for="coursera-search">Que souhaitez-vous apprendre ?</label>
+      <input 
+        id="coursera-search" 
+        type="text" 
+        name="search" 
+        placeholder="Que souhaitez-vous apprendre ?" 
+        aria-label="Que souhaitez-vous apprendre ?"
+        autocomplete="off"
+      >
+      
+      <button class="sc-search-btn" type="submit" aria-label="Rechercher">
+        <svg class="sc-search-btn__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13 13L17.5 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     </form>
 
-    <nav class="sc-nav-actions">
-      <a class="sc-link" href="{{loginurl}}">Connexion</a>
-      <a class="sc-btn sc-btn--signup" href="{{signupurl}}" data-signup-modal>Inscrivez-vous gratuitement</a>
+    <!-- Actions: Connexion & Inscription -->
+    <nav class="sc-nav-actions" aria-label="Actions utilisateur">
+      <a class="sc-link" href="{{{loginurl}}}" data-login-modal data-modal-title="Connexion">Connexion</a>
+      <a class="sc-btn sc-btn--signup" href="{{{signupurl}}}" data-signup-modal data-modal-title="Inscription">S'inscrire gratuitement</a>
     </nav>
   </div>
 </header>
