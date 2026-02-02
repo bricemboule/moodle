@@ -49,6 +49,8 @@ $addurl = new moodle_url('/local/spacechildpages/marketing_category_edit.php');
 echo $OUTPUT->single_button($addurl, get_string('addcategory', 'local_spacechildpages'), 'get');
 
 $records = $DB->get_records('local_spacechildpages_mcategories', null, 'sortorder ASC, name ASC');
+$context = context_system::instance();
+$fs = get_file_storage();
 
 $table = new html_table();
 $table->head = [
@@ -62,9 +64,33 @@ $table->head = [
 
 foreach ($records as $record) {
     $image = '-';
-    if (!empty($record->imageurl)) {
+    $imageurl = null;
+
+    $files = $fs->get_area_files(
+        $context->id,
+        'local_spacechildpages',
+        'marketingcategoryimage',
+        $record->id,
+        'itemid, filepath, filename',
+        false
+    );
+    if (!empty($files)) {
+        $file = reset($files);
+        $imageurl = moodle_url::make_pluginfile_url(
+            $file->get_contextid(),
+            $file->get_component(),
+            $file->get_filearea(),
+            $file->get_itemid(),
+            $file->get_filepath(),
+            $file->get_filename()
+        )->out(false);
+    } else if (!empty($record->imageurl)) {
+        $imageurl = $record->imageurl;
+    }
+
+    if (!empty($imageurl)) {
         $image = html_writer::empty_tag('img', [
-            'src' => $record->imageurl,
+            'src' => $imageurl,
             'alt' => s($record->name),
             'style' => 'height:40px;width:auto;',
         ]);

@@ -256,6 +256,7 @@ $string['categoryheader'] = 'Category menu';
 $string['categoryhidden'] = '(hidden)';
 $string['categorymodifiedcancel'] = 'Category was modified! Please cancel and try again.';
 $string['categoryname'] = 'Category name';
+$string['categoryimage'] = 'Category image';
 $string['categorypath'] = 'Category path';
 $string['categorysubcategoryof'] = '{$a->category} - subcategory of {$a->parentcategory}';
 $string['idnumbercoursecategory'] = 'Category ID number';

@@ -12,14 +12,29 @@ class enrol_request_form extends \moodleform {
         $customdata = $this->_customdata ?? [];
 
         $courseid = (int)($customdata['courseid'] ?? 0);
+        $courses = $customdata['courses'] ?? [];
+        $courseLocked = !empty($customdata['course_locked']);
         $defaults = $customdata['defaults'] ?? [];
+
+        $this->set_display_vertical();
+        $mform->setRequiredNote('');
 
         $mform->addElement('header', 'details', get_string('enrolrequest:details', 'local_spacechildpages'));
 
-        $mform->addElement('hidden', 'courseid', $courseid);
-        $mform->setType('courseid', PARAM_INT);
-
-        $mform->addElement('html', '<div class="sc-form-grid">');
+        if ($courseLocked) {
+            $mform->addElement('hidden', 'courseid', $courseid);
+            $mform->setType('courseid', PARAM_INT);
+        } else {
+            $options = [0 => get_string('field_course_select', 'local_spacechildpages')] + $courses;
+            $mform->addElement(
+                'select',
+                'courseid',
+                get_string('field_course', 'local_spacechildpages'),
+                $options
+            );
+            $mform->setType('courseid', PARAM_INT);
+            $mform->addRule('courseid', null, 'required', null, 'client');
+        }
 
         $mform->addElement(
             'text',
@@ -65,8 +80,6 @@ class enrol_request_form extends \moodleform {
         );
         $mform->setType('position', PARAM_TEXT);
 
-        $mform->addElement('html', '</div>');
-
         $mform->addElement(
             'textarea',
             'message',
@@ -90,9 +103,23 @@ class enrol_request_form extends \moodleform {
 
     public function validation($data, $files) {
         $errors = parent::validation($data, $files);
+        $customdata = $this->_customdata ?? [];
+        $courseLocked = !empty($customdata['course_locked']);
+        $courses = $customdata['courses'] ?? [];
 
         if (!empty($data['phone']) && strlen(trim($data['phone'])) < 6) {
             $errors['phone'] = get_string('field_phone_invalid', 'local_spacechildpages');
+        }
+
+        if (!empty($data['email']) && !validate_email($data['email'])) {
+            $errors['email'] = get_string('invalidemail');
+        }
+
+        if (!$courseLocked) {
+            $selected = (int)($data['courseid'] ?? 0);
+            if (empty($selected) || !isset($courses[$selected])) {
+                $errors['courseid'] = get_string('field_course_required', 'local_spacechildpages');
+            }
         }
 
         return $errors;

@@ -90,13 +90,32 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title($title);
 $PAGE->set_heading($fullname);
 
+$categoryimageoptions = [
+    'maxfiles' => 1,
+    'maxbytes' => $CFG->maxbytes,
+    'subdirs' => 0,
+    'accepted_types' => ['image'],
+];
+
+$categorycontext = $id ? $context : null;
+$category = file_prepare_standard_filemanager(
+    $category,
+    'categoryimage',
+    $categoryimageoptions,
+    $categorycontext,
+    'coursecat',
+    'categoryimage',
+    0
+);
+
 $mform = new core_course_editcategory_form(null, array(
     'categoryid' => $id,
     'parent' => $category->parent,
     'context' => $context,
-    'itemid' => $itemid
+    'itemid' => $itemid,
+    'categoryimageoptions' => $categoryimageoptions,
 ));
-$mform->set_data(file_prepare_standard_editor(
+$category = file_prepare_standard_editor(
     $category,
     'description',
     $mform->get_description_editor_options(),
@@ -104,7 +123,8 @@ $mform->set_data(file_prepare_standard_editor(
     'coursecat',
     'description',
     $itemid
-));
+);
+$mform->set_data($category);
 
 $manageurl = new moodle_url('/course/management.php');
 if ($mform->is_cancelled()) {
@@ -123,6 +143,19 @@ if ($mform->is_cancelled()) {
     } else {
         $category = core_course_category::create($data, $mform->get_description_editor_options());
     }
+
+    $categorycontext = context_coursecat::instance($category->id);
+    if (isset($data->categoryimage_filemanager)) {
+        file_save_draft_area_files(
+            $data->categoryimage_filemanager,
+            $categorycontext->id,
+            'coursecat',
+            'categoryimage',
+            0,
+            $categoryimageoptions
+        );
+    }
+
     $manageurl->param('categoryid', $category->id);
     redirect($manageurl);
 }

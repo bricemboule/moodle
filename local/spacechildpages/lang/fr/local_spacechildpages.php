@@ -14,7 +14,8 @@ $string['confirmdeletecategory'] = 'Supprimer la catégorie « {$a} » ?';
 $string['confirmdeletecourse'] = 'Supprimer le cours « {$a} » ?';
 $string['categoryname'] = 'Nom';
 $string['categorymeta'] = 'Méta';
-$string['categoryimage'] = 'URL de l’image';
+$string['categoryimage'] = 'Image';
+$string['categoryimageurl'] = 'URL de l’image (optionnelle)';
 $string['categoryurl'] = 'URL du lien';
 $string['coursetitle'] = 'Nom du cours';
 $string['coursedescription'] = 'Description courte';
@@ -68,10 +69,27 @@ $string['enrolrequest:missingtable'] = 'La table des demandes est manquante. Lan
 $string['enrolrequest:approved_enrolled'] = 'Demande approuvée et utilisateur inscrit.';
 $string['enrolrequest:approved_already'] = 'Demande approuvée. Utilisateur déjà inscrit.';
 $string['enrolrequest:approved_noenrol'] = 'Demande approuvée. Aucune inscription effectuée.';
+$string['enrolrequest:approved_subject'] = 'Votre demande d’inscription sur {$a} a été approuvée';
+$string['enrolrequest:approved_body'] = 'Bonjour {$a->fullname},' . "\n\n"
+    . 'Votre demande d\'inscription a été approuvée.' . "\n\n"
+    . 'Cours : {$a->course}' . "\n"
+    . 'Accès au cours : {$a->courseurl}' . "\n\n"
+    . 'Informations de connexion :' . "\n"
+    . 'URL de connexion : {$a->loginurl}' . "\n"
+    . 'Identifiant : {$a->username}' . "\n"
+    . 'Email : {$a->email}' . "\n\n"
+    . 'Mot de passe : si vous en avez déjà un, utilisez-le. Sinon, consultez l\'email de création/réinitialisation.' . "\n"
+    . 'Mot de passe oublié ? {$a->forgoturl}' . "\n\n"
+    . 'Merci,' . "\n"
+    . '{$a->sitename}' . "\n";
+$string['enrolrequest:user_notfound'] = 'Aucun utilisateur trouvé pour cet email : {$a}.';
 $string['enrolrequest:manual_missing'] = 'Le plugin d’inscription manuelle est désactivé.';
 $string['enrolrequest:manual_instance_missing'] = 'Aucune instance d’inscription manuelle active pour ce cours.';
 $string['field_fullname'] = 'Nom complet';
 $string['field_email'] = 'Email';
+$string['field_course'] = 'Cours';
+$string['field_course_select'] = 'Sélectionner un cours';
+$string['field_course_required'] = 'Veuillez sélectionner un cours.';
 $string['field_phone'] = 'Téléphone';
 $string['field_organisation'] = 'Organisation';
 $string['field_position'] = 'Poste';

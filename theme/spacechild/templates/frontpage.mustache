@@ -1,344 +1,281 @@
-<div class="cs-landing cs-landing--full {{#hastoplinks}}has-topstrip{{/hastoplinks}}">
+<!-- ============================================
+     LANDING PAGE HOME - HEADER UNIFIÉ
+     ============================================ -->
 
-  <!-- ✅ TOP STRIP (barre noire type Coursera) -->
-  {{#hastoplinks}}
-  <div class="cs-topstrip">
-    <div class="cs-container cs-topstrip__inner">
-      <nav class="cs-topstrip__nav" aria-label="Menu haut">
-        {{#toplinks}}
-          <a class="cs-topstrip__link" href="{{{url}}}">{{label}}</a>
-        {{/toplinks}}
-      </nav>
+<div class="cs-landing cs-landing--full has-topstrip">
+
+  <!-- Top Strip -->
+  <div class="sc-topbar">
+    <div class="sc-container sc-topbar-inner">
+      
+      <a href="{{peopleurl}}">Pour les personnes</a>
+      <a href="{{universitiesurl}}">Pour les universités</a>
+      <a href="{{governmentsurl}}">Pour les gouvernements</a>
     </div>
   </div>
-  {{/hastoplinks}}
 
- 
+  <!-- Navigation principale -->
+  <header class="sc-nav">
+    <div class="sc-container sc-nav-inner">
+      <!-- Logo -->
+      <a class="sc-logo" href="{{wwwroot}}">
+        <img class="sc-logo-image" src="{{wwwroot}}/theme/spacechild/images/LOGO.png" alt="{{sitename}}">
+      </a>
 
-  <!-- Top bar -->
-  <header class="cs-topbar">
-    <div class="cs-container cs-topbar__inner">
-      <div class="cs-topbar__brand cs-animate-left">
-        <a class="cs-brand__logo" href="{{{exploreurl}}}">
-          <img src="{{wwwroot}}/theme/spacechild/images/qualisys-logo.svg" alt="{{sitename}}">
-          <span class="cs-brand__tagline">training</span>
-        </a>
-        <nav class="cs-topbar__links" aria-label="Navigation principale">
-          <a class="cs-topbar__link" href="{{{exploreurl}}}">Explorer</a>
-          <a class="cs-topbar__link" href="{{{searchurl}}}">Diplomes</a>
-        </nav>
-      </div>
+      <!-- Lien Explorer -->
+      <a class="sc-nav-link" href="{{exploreurl}}">Explorer</a>
 
-      <form class="cs-topbar__search cs-animate-zoom" action="{{{searchurl}}}" method="get" role="search">
+      <!-- Barre de recherche avec loupe -->
+      <form class="sc-nav-search" method="get" action="{{searchurl}}" role="search">
+        <label class="sc-visually-hidden" for="sc-nav-search">Que souhaitez-vous apprendre ?</label>
         <input
-          class="cs-topbar__search-input"
+          id="sc-nav-search"
           type="text"
           name="search"
-          placeholder="Que souhaiterez-vous apprendre ?"
-          aria-label="Que souhaiterez-vous apprendre ?"
+          placeholder="Que souhaitez-vous apprendre ?"
+          aria-label="Que souhaitez-vous apprendre ?"
         >
-        <button class="cs-topbar__search-btn" type="submit">Rechercher</button>
+        <button class="sc-search-btn" type="submit" aria-label="Rechercher">
+          <svg class="sc-search-btn__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12.5 12.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
       </form>
 
-      <nav class="cs-topbar__actions cs-animate-right">
-        <a class="cs-topbar__link cs-topbar__link--muted" href="{{{loginurl}}}">Connexion</a>
-        <a class="cs-btn cs-btn--ghost" href="{{{signupurl}}}" data-signup-modal>Inscrivez-vous gratuitement</a>
+      <!-- Actions -->
+      <nav class="sc-nav-actions" aria-label="Actions utilisateur">
+        <a class="sc-link" href="{{loginurl}}" data-login-modal data-modal-title="Connexion">Connexion</a>
+        <a class="sc-btn sc-btn--signup" href="{{signupurl}}" data-signup-modal data-modal-title="Inscription">S'inscrire gratuitement</a>
       </nav>
     </div>
   </header>
 
-   <!-- Announcement carousel -->
-  <section class="cs-announcement cs-animate" aria-label="Annonces">
-    <div class="cs-container">
-      <div class="cs-announcement__viewport">
-        <div class="cs-announcement__track">
-          <div class="cs-announcement__list">
-            <div class="cs-announcement__item">Nouveau parcours ISO 9001 : inscriptions ouvertes.</div>
-            <div class="cs-announcement__item">Webinaire gratuit : Audit interne qualite, le 15 avril.</div>
-            <div class="cs-announcement__item">HSE et securite : -20% pour les equipes ce mois-ci.</div>
-            <div class="cs-announcement__item">Certificats partageables sur LinkedIn des la fin du cours.</div>
-          </div>
-          <div class="cs-announcement__list" aria-hidden="true">
-            <div class="cs-announcement__item">Nouveau parcours ISO 9001 : inscriptions ouvertes.</div>
-            <div class="cs-announcement__item">Webinaire gratuit : Audit interne qualite, le 15 avril.</div>
-            <div class="cs-announcement__item">HSE et securite : -20% pour les equipes ce mois-ci.</div>
-            <div class="cs-announcement__item">Certificats partageables sur LinkedIn des la fin du cours.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hero carousel -->
-  {{#hascarousel}}
-  <section class="cs-hero cs-hero--carousel cs-animate">
-    <div class="cs-container">
-      <div class="cs-carousel" role="region" aria-label="Annonces principales" style="--cs-carousel-count: {{carouselcount}};">
-        <div class="cs-carousel__viewport">
-          <div class="cs-carousel__track">
-            {{#carousel}}
-            <div class="cs-carousel__slide">
-              {{#primary}}
-              <article class="cs-promo cs-promo--brand cs-stagger cs-animate-left">
-                <div class="cs-promo__tag">{{tag}}</div>
-                <h2>{{title}}</h2>
-                <p>{{text}}</p>
-                <a class="cs-btn cs-btn--ghost" href="{{{url}}}">{{cta}}</a>
-                {{#badge}}<div class="cs-promo__badge">{{badge}}</div>{{/badge}}
-              </article>
-              {{/primary}}
-
-              {{#secondary}}
-              <article class="cs-promo cs-promo--light cs-promo--split cs-animate-right">
-                <div class="cs-promo__content cs-stagger">
-                  <div class="cs-promo__tag">{{tag}}</div>
-                  <h2>{{title}}</h2>
-                  <p>{{text}}</p>
-                  <a class="cs-btn cs-btn--ghost" href="{{{url}}}">{{cta}}</a>
-                </div>
-                <div class="cs-promo__visual cs-animate" aria-hidden="true">
-                  <div class="cs-promo__ring"></div>
-                  <div class="cs-promo__orb"></div>
-                  {{#icon}}
-                  <div class="cs-promo__icon">
-                    <img src="{{{icon}}}" alt="">
-                  </div>
-                  {{/icon}}
-                </div>
-              </article>
-              {{/secondary}}
-            </div>
-            {{/carousel}}
-          </div>
-        </div>
-
-        <div class="cs-carousel__dots" aria-hidden="true">
-          {{#carouseldots}}
-            <span{{#isactive}} class="is-active"{{/isactive}}></span>
-          {{/carouseldots}}
-        </div>
-      </div>
-    </div>
-  </section>
-  {{/hascarousel}}
-
-  <!-- Logos / trust -->
-  <section class="cs-trust">
-    <div class="cs-container">
-      <p class="cs-trust__title cs-animate">Ils nous font confiance</p>
-      <div class="cs-trust__logos cs-stagger">
-        <span class="cs-pill">Université</span>
-        <span class="cs-pill">Entreprise</span>
-        <span class="cs-pill">ONG</span>
-        <span class="cs-pill">Administration</span>
-        <span class="cs-pill">Partenaire</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="cs-metrics" aria-label="Chiffres cles">
-    <div class="cs-container">
-      <div class="cs-metrics__inner">
-        <div class="cs-metrics__intro cs-animate">
-          <span class="cs-metrics__eyebrow">Chiffres cles</span>
-          <h2>Des resultats concrets pour chaque public</h2>
-          <p class="cs-metrics__lead">
-            Suivez la progression des apprenants, la richesse du catalogue et la dynamique des partenaires.
+  <!-- Hero Section -->
+  <section class="sc-hero" aria-labelledby="hero-title">
+    <div class="sc-container">
+      <div class="sc-hero-grid">
+        <div class="sc-hero-copy">
+          <span class="sc-eyebrow">Plateforme de formation professionnelle</span>
+          <h1 id="hero-title">Apprenez sans limites</h1>
+          <p>
+            Démarrez, changez ou faites progresser votre carrière avec plus de 7 000 cours 
+            issus d'universités et d'entreprises leaders mondiales.
           </p>
+
+          <div class="sc-hero-actions">
+            <a class="sc-btn sc-btn--primary" href="{{signupurl}}" data-signup-modal>
+              Inscription gratuite
+            </a>
+          </div>
+
+          <div class="sc-hero-tags">
+            <span>ISO 9001</span>
+            <span>Data Analytics</span>
+            <span>Cybersécurité</span>
+            <span>Management</span>
+            <span>UX Design</span>
+          </div>
         </div>
-        <div class="cs-metrics__grid cs-stagger" role="list">
-          <div class="cs-metric" role="listitem">
-            <div class="cs-metric__value" data-countup="1" data-target="200" data-suffix="+">200+</div>
-            <div class="cs-metric__label">Apprenants formes</div>
+
+        <div class="sc-hero-panel">
+          <div class="sc-card-media sc-card-media--hero sc-animate">
+            <img src="{{wwwroot}}/theme/spacechild/images/acc.jpg" alt="Apprenants en formation" loading="lazy">
           </div>
-          <div class="cs-metric" role="listitem">
-            <div class="cs-metric__value" data-countup="1" data-target="100" data-suffix="+">100+</div>
-            <div class="cs-metric__label">Cours disponibles</div>
-          </div>
-          <div class="cs-metric" role="listitem">
-            <div class="cs-metric__value" data-countup="1" data-target="100" data-suffix="%">100%</div>
-            <div class="cs-metric__label">Satisfaction moyenne</div>
-          </div>
-          <div class="cs-metric" role="listitem">
-            <div class="cs-metric__value" data-countup="1" data-target="20" data-suffix="+">20+</div>
-            <div class="cs-metric__label">Categories actives</div>
+          <div class="sc-feature-card sc-animate">
+            <span class="sc-card-tag">Nouveau</span>
+            <h3>Certificats Professionnels</h3>
+            <p>Obtenez des compétences recherchées en 3-6 mois</p>
+            <div class="sc-feature-meta">
+              <span>Google</span>
+              <span>IBM</span>
+              <span>Microsoft</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Catégories populaires</h2>
-        <a class="cs-link" href="{{{exploreurl}}}">Tout voir →</a>
+  <!-- Section Partenaires -->
+  <section class="sc-section" aria-label="Nos partenaires">
+    <div class="sc-container">
+      <div class="sc-logos">
+        <p class="sc-logos-title">Apprenez avec les meilleurs</p>
+        <div class="sc-logos-row">
+          <span class="sc-logo-pill">Google</span>
+          <span class="sc-logo-pill">IBM</span>
+          <span class="sc-logo-pill">Microsoft</span>
+          <span class="sc-logo-pill">Stanford</span>
+          <span class="sc-logo-pill">Yale</span>
+          <span class="sc-logo-pill">Meta</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section KPIs -->
+  <section class="sc-section sc-section--soft" aria-labelledby="metrics-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="metrics-title">Une plateforme qui fait la différence</h2>
+        <p class="sc-section-sub">Des résultats concrets pour des milliers d'apprenants</p>
       </div>
 
-      {{#hascategories}}
-      <div class="cs-grid cs-grid--4 cs-stagger">
+      <div class="sc-kpis sc-stagger">
+        <div class="sc-kpi">
+          <div class="sc-kpi-value">7 000+</div>
+          <div class="sc-kpi-label">Cours disponibles</div>
+        </div>
+        <div class="sc-kpi">
+          <div class="sc-kpi-value">350+</div>
+          <div class="sc-kpi-label">Universités partenaires</div>
+        </div>
+        <div class="sc-kpi">
+          <div class="sc-kpi-value">91%</div>
+          <div class="sc-kpi-label">Bénéfices carrière positifs</div>
+        </div>
+        <div class="sc-kpi">
+          <div class="sc-kpi-value">145M+</div>
+          <div class="sc-kpi-label">Apprenants dans le monde</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Catégories -->
+  {{#hascategories}}
+  <section class="sc-section" aria-labelledby="categories-title">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2 id="categories-title">Explorez par catégorie</h2>
+        <a class="sc-link" href="{{exploreurl}}">Voir toutes →</a>
+      </div>
+      <div class="sc-grid sc-grid--categories sc-stagger">
         {{#categories}}
-          <a class="cs-card" href="{{{url}}}">
+          <a class="sc-card" href="{{{url}}}">
             {{#image}}
-              <div class="cs-card__media">
+              <div class="sc-card-media">
                 <img src="{{{image}}}" alt="{{name}}" loading="lazy">
               </div>
             {{/image}}
-            <div class="cs-card__title">{{name}}</div>
-            <div class="cs-card__meta">Voir les cours</div>
+            <h3>{{name}}</h3>
+            <p>{{meta}}</p>
           </a>
         {{/categories}}
       </div>
-      {{/hascategories}}
-
-  {{^hascategories}}
-    <div class="cs-empty">Aucune catégorie à afficher.</div>
+    </div>
+  </section>
   {{/hascategories}}
-</div>
-</section>
 
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Pourquoi choisir {{sitename}}</h2>
+  <!-- Section Objectifs -->
+  <section class="sc-section sc-section--alt" aria-labelledby="goals-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="goals-title">Qu'est-ce qui vous amène ici aujourd'hui ?</h2>
+        <p class="sc-section-sub">Choisissez votre objectif</p>
       </div>
-      <div class="cs-grid cs-grid--4 cs-stagger">
-        <div class="cs-card">
-          <div class="cs-card__title">Experts terrain</div>
-          <div class="cs-card__meta">Cours créés par des professionnels en activité.</div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
+          <h3>Démarrer ma carrière</h3>
+          <p>Lancez-vous dans un nouveau domaine professionnel</p>
         </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Projets concrets</div>
-          <div class="cs-card__meta">Cas pratiques et portfolio guidé.</div>
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔄</div>
+          <h3>Changer de carrière</h3>
+          <p>Reconvertissez-vous dans un secteur porteur</p>
         </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Flexibilité totale</div>
-          <div class="cs-card__meta">Accès 24/7 sur mobile et desktop.</div>
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">📈</div>
+          <h3>Progresser dans mon rôle</h3>
+          <p>Développez de nouvelles compétences</p>
         </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Certifications</div>
-          <div class="cs-card__meta">Badges et attestations en fin de parcours.</div>
+        <div class="sc-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎓</div>
+          <h3>Explorer de nouveaux sujets</h3>
+          <p>Apprenez pour le plaisir d'apprendre</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Formats d’apprentissage</h2>
+  <!-- Section Cours -->
+  {{#hascourses}}
+  <section class="sc-section" aria-labelledby="courses-title">
+    <div class="sc-container">
+      <div class="sc-section-head">
+        <h2 id="courses-title">Cours populaires</h2>
+        <a class="sc-link" href="{{searchurl}}">Voir tous →</a>
       </div>
-      <div class="cs-grid cs-grid--4 cs-stagger">
-        <div class="cs-card">
-          <div class="cs-card__title">Cours vidéo courts</div>
-          <div class="cs-card__meta">Leçons de 5-10 min, faciles à suivre.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Labs interactifs</div>
-          <div class="cs-card__meta">Exercices guidés et quizz immédiats.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Projets encadrés</div>
-          <div class="cs-card__meta">Briefs réels, feedback et corrections.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card__title">Évaluations</div>
-          <div class="cs-card__meta">Tests, badges et suivi de progression.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {{#haspaths}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Parcours certifiants</h2>
-        <a class="cs-link" href="{{{exploreurl}}}">Voir les parcours →</a>
-      </div>
-      <div class="cs-grid cs-grid--3 cs-stagger">
-        {{#paths}}
-          <article class="cs-card cs-card--path">
-            <div class="cs-card__eyebrow">{{badge}}</div>
-            <div class="cs-card__title">{{title}}</div>
-            <div class="cs-card__meta">{{summary}}</div>
-            <div class="cs-card__meta">{{duration}} • {{level}} • {{projects}}</div>
-            <a class="cs-link" href="{{{url}}}">{{cta}}</a>
-          </article>
-        {{/paths}}
-      </div>
-    </div>
-  </section>
-  {{/haspaths}}
-
-  <!-- Featured courses -->
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Cours recommandés</h2>
-        <a class="cs-link" href="{{{searchurl}}}">Rechercher des cours →</a>
-      </div>
-
-      {{#hascourses}}
-      <div class="cs-grid cs-grid--4 cs-stagger">
+      <div class="sc-grid sc-grid--courses sc-stagger">
         {{#courses}}
-          <article class="cs-course">
-            <div class="cs-course__thumb">
-              {{#image}}
+          <article class="sc-card">
+            {{#image}}
+              <div class="sc-card-media">
                 <img src="{{{image}}}" alt="{{title}}" loading="lazy">
-              {{/image}}
-              {{^image}}
-                <div class="cs-course__thumbInner"></div>
-              {{/image}}
-            </div>
-            <div class="cs-course__body">
-              <div class="cs-course__title">{{title}}</div>
-              <div class="cs-course__summary">{{summary}}</div>
-              {{#canrequest}}
-              <a class="cs-course__cta" href="{{{enrolurl}}}" data-signup-modal>Demander l’inscription →</a>
-              {{/canrequest}}
-            </div>
+              </div>
+            {{/image}}
+            <span class="sc-card-tag">Formation</span>
+            <h3>{{title}}</h3>
+            <p>{{summary}}</p>
+            {{#canrequest}}
+              <a class="sc-link" href="{{{enrolurl}}}" data-signup-modal>S'inscrire →</a>
+            {{/canrequest}}
           </article>
         {{/courses}}
       </div>
-      {{/hascourses}}
+    </div>
+  </section>
+  {{/hascourses}}
 
-      {{^hascourses}}
-        <div class="cs-empty">Aucun cours à afficher.</div>
-      {{/hascourses}}
+  <!-- Section Avantages -->
+  <section class="sc-section sc-section--soft" aria-labelledby="benefits-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="benefits-title">Pourquoi nous choisir</h2>
+        <p class="sc-section-sub">Une expérience d'apprentissage pensée pour votre réussite</p>
+      </div>
+      <div class="sc-grid sc-grid--features sc-stagger">
+        <div class="sc-card">
+          <span class="sc-card-tag">Qualité</span>
+          <h3>Formateurs experts</h3>
+          <p>Apprenez avec des professionnels reconnus</p>
+        </div>
+        <div class="sc-card">
+          <span class="sc-card-tag">Pratique</span>
+          <h3>Projets concrets</h3>
+          <p>Développez votre portfolio</p>
+        </div>
+        <div class="sc-card">
+          <span class="sc-card-tag">Flexibilité</span>
+          <h3>À votre rythme</h3>
+          <p>Accédez aux cours 24/7</p>
+        </div>
+        <div class="sc-card">
+          <span class="sc-card-tag">Certification</span>
+          <h3>Attestations reconnues</h3>
+          <p>Valorisez vos compétences</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  {{#hasoutcomes}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Résultats concrets pour les apprenants</h2>
-      </div>
-      <div class="cs-outcomes cs-stagger">
-        {{#outcomes}}
-          <div class="cs-outcome">
-            <div class="cs-outcome__value">{{value}}</div>
-            <div class="cs-outcome__label">{{label}}</div>
-          </div>
-        {{/outcomes}}
-      </div>
-    </div>
-  </section>
-  {{/hasoutcomes}}
-
+  <!-- Section Témoignages -->
   {{#hastestimonials}}
-  <section class="cs-section cs-section--muted">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Ce que disent nos apprenants</h2>
+  <section class="sc-section" aria-labelledby="testimonials-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="testimonials-title">Ce qu'en disent nos apprenants</h2>
+        <p class="sc-section-sub">Des milliers de personnes ont déjà transformé leur carrière</p>
       </div>
-      <div class="cs-grid cs-grid--3 cs-stagger">
+      <div class="sc-grid sc-grid--testimonials sc-stagger">
         {{#testimonials}}
-          <article class="cs-quote">
-            <div class="cs-quote__text">“{{quote}}”</div>
-            <div class="cs-quote__by">{{name}} • {{role}}</div>
+          <article class="sc-card sc-card--testimonial">
+            <p>"{{quote}}"</p>
+            <div class="sc-testimonial-by">
+              <strong>{{name}}</strong> • {{role}}
+            </div>
           </article>
         {{/testimonials}}
       </div>
@@ -346,17 +283,46 @@
   </section>
   {{/hastestimonials}}
 
-  {{#hasfaq}}
-  <section class="cs-section">
-    <div class="cs-container">
-      <div class="cs-section__head cs-animate">
-        <h2>Questions fréquentes</h2>
+  <!-- Section Comment ça marche -->
+  <section class="sc-section sc-section--alt" aria-labelledby="steps-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="steps-title">Commencez en 3 étapes simples</h2>
+        <p class="sc-section-sub">Un parcours d'apprentissage clair</p>
       </div>
-      <div class="cs-faq cs-stagger">
+      <div class="sc-steps sc-stagger">
+        <div class="sc-step">
+          <div class="sc-step-number">01</div>
+          <h3>Choisissez votre formation</h3>
+          <p>Explorez notre catalogue</p>
+        </div>
+        <div class="sc-step">
+          <div class="sc-step-number">02</div>
+          <h3>Apprenez à votre rythme</h3>
+          <p>Suivez les modules et projets</p>
+        </div>
+        <div class="sc-step">
+          <div class="sc-step-number">03</div>
+          <h3>Obtenez votre certification</h3>
+          <p>Validez vos acquis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section FAQ -->
+  {{#hasfaq}}
+  <section class="sc-section" aria-labelledby="faq-title">
+    <div class="sc-container">
+      <div class="sc-section-head sc-section-head--stack">
+        <h2 id="faq-title">Questions fréquentes</h2>
+        <p class="sc-section-sub">Tout ce que vous devez savoir</p>
+      </div>
+      <div class="sc-faq sc-stagger">
         {{#faq}}
-          <details class="cs-faq__item">
+          <details class="sc-faq-item">
             <summary>{{question}}</summary>
-            <div class="cs-faq__answer">{{answer}}</div>
+            <div class="sc-faq-answer">{{answer}}</div>
           </details>
         {{/faq}}
       </div>
@@ -364,8 +330,23 @@
   </section>
   {{/hasfaq}}
 
- 
+  <!-- CTA Final -->
+  <section class="sc-cta" aria-labelledby="cta-title">
+    <div class="sc-container">
+      <div class="sc-cta-inner">
+        <div>
+          <h2 id="cta-title">Prêt à commencer votre formation ?</h2>
+          <p>Rejoignez des milliers d'apprenants dès aujourd'hui</p>
+        </div>
+        <div class="sc-cta-actions">
+          <a class="sc-btn sc-btn--primary" href="{{signupurl}}" data-signup-modal data-modal-title="Inscription">Créer un compte gratuit</a>
+          <a class="sc-btn sc-btn--ghost" href="{{exploreurl}}">Explorer le catalogue</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Footer -->
   {{> theme_spacechild/spacechild/signup_modal }}
   {{> theme_spacechild/spacechild/landing_footer }}
 

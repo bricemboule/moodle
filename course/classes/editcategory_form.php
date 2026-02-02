@@ -43,6 +43,12 @@ class core_course_editcategory_form extends moodleform {
         $mform = $this->_form;
         $categoryid = $this->_customdata['categoryid'];
         $parent = $this->_customdata['parent'];
+        $categoryimageoptions = $this->_customdata['categoryimageoptions'] ?? [
+            'maxfiles' => 1,
+            'maxbytes' => $CFG->maxbytes,
+            'subdirs' => 0,
+            'accepted_types' => ['image'],
+        ];
 
         // Get list of categories to use as parents, with site as the first one.
         $options = array();
@@ -77,6 +83,8 @@ class core_course_editcategory_form extends moodleform {
         $mform->addElement('editor', 'description_editor', get_string('description'), null,
             $this->get_description_editor_options());
         $mform->setType('description_editor', PARAM_RAW);
+
+        $mform->addElement('filemanager', 'categoryimage_filemanager', get_string('categoryimage'), null, $categoryimageoptions);
 
         if (!empty($CFG->allowcategorythemes)) {
             $themes = array(''=>get_string('forceno'));

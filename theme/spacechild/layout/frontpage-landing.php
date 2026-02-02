@@ -26,6 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 global $PAGE;
 
+$PAGE->requires->css(new moodle_url('/theme/spacechild/style/marketing.css'));
+$PAGE->requires->css(new moodle_url('/theme/spacechild/style/navigation-coursera.css'));
+
 $PAGE->requires->js(new moodle_url('/theme/spacechild/javascript/marketing.js'));
 
 if (isloggedin() && !isguestuser()) {

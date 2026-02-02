@@ -189,6 +189,9 @@ class renderer extends \theme_space\output\core\course_renderer {
             'wwwroot' => $CFG->wwwroot,
             'hastoplinks' => !empty($toplinks),
             'toplinks' => $toplinks,
+            'peopleurl' => (new moodle_url('/local/spacechildpages/people.php'))->out(false),
+            'universitiesurl' => (new moodle_url('/local/spacechildpages/universities.php'))->out(false),
+            'governmentsurl' => (new moodle_url('/local/spacechildpages/governments.php'))->out(false),
             'logourl' => $logourl,
             'sitename' => format_string(
                 $SITE->shortname ?: $SITE->fullname,

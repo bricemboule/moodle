@@ -217,22 +217,29 @@
     if (!modal) return;
 
     const iframe = modal.querySelector("iframe");
+    const titleNode = modal.querySelector(".sc-modal__title");
     const closeTargets = Array.from(
       modal.querySelectorAll("[data-sc-modal-close]")
     );
     const triggers = Array.from(
       document.querySelectorAll(
-        'a[href*="/login/signup.php"], a[href*="/local/spacechildpages/enrol_request.php"], [data-signup-modal]'
+        'a[href*="/login/signup.php"], a[href*="/local/spacechildpages/enrol_request.php"], a[href*="/login/index.php"], [data-signup-modal], [data-login-modal]'
       )
     );
     if (!triggers.length) return;
 
     let lastActive = null;
 
-    const open = (url) => {
+    const open = (url, title) => {
       lastActive = document.activeElement;
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
+      if (title) {
+        if (titleNode) {
+          titleNode.textContent = title;
+        }
+        modal.setAttribute("aria-label", title);
+      }
       if (document.body) {
         document.body.classList.add("sc-modal-open");
       }
@@ -271,8 +278,21 @@
 
         const href = link.getAttribute("href");
         if (!href) return;
+        const explicitTitle = link.getAttribute("data-modal-title")
+          || link.getAttribute("data-sc-modal-title");
+        let title = explicitTitle;
+        if (!title) {
+          if (href.includes("/login/index.php")) {
+            title = "Connexion";
+          } else if (
+            href.includes("/login/signup.php") ||
+            href.includes("/local/spacechildpages/enrol_request.php")
+          ) {
+            title = "Inscription";
+          }
+        }
         event.preventDefault();
-        open(href);
+        open(href, title);
       });
     });
 

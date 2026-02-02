@@ -4952,6 +4952,31 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
             \core\session\manager::write_close(); // Unlock session during file serving.
             send_stored_file($file, 60*60, 0, $forcedownload, $sendfileoptions);
+        } else if ($filearea === 'categoryimage') {
+            if ($CFG->forcelogin) {
+                // no login necessary - unless login forced everywhere
+                require_login();
+            }
+
+            // Check if user can view this category.
+            if (!core_course_category::get($context->instanceid, IGNORE_MISSING)) {
+                send_file_not_found();
+            }
+
+            $itemid = array_shift($args);
+            if ($itemid === null) {
+                send_file_not_found();
+            }
+
+            $filename = array_pop($args);
+            $filepath = $args ? '/'.implode('/', $args).'/' : '/';
+            if (!$file = $fs->get_file($context->id, 'coursecat', 'categoryimage', (int) $itemid, $filepath, $filename)
+                or $file->is_directory()) {
+                send_file_not_found();
+            }
+
+            \core\session\manager::write_close(); // Unlock session during file serving.
+            send_stored_file($file, 60*60, 0, $forcedownload, $sendfileoptions);
         } else {
             send_file_not_found();
         }
