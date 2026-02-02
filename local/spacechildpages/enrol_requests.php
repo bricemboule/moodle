@@ -70,6 +70,8 @@ if (!empty($action) && !empty($id)) {
             if ($action === 'approve') {
                 $enrolerror = '';
                 $enrolmessage = '';
+                $usercreated = false;
+                $defaultpassword = 'Welcome2024!'; // Mot de passe par défaut déclaré ici
 
                 $course = null;
                 if (!empty($request->courseid)) {
@@ -78,10 +80,13 @@ if (!empty($action) && !empty($id)) {
 
                 $user = null;
                 if (!empty($request->userid)) {
-                    $user = $DB->get_record('user', ['id' => $request->userid, 'deleted' => 0], 'id', IGNORE_MISSING);
+                    $user = \core_user::get_user($request->userid, '*', IGNORE_MISSING);
+                    if ($user && !empty($user->deleted)) {
+                        $user = null;
+                    }
                 }
                 if (!$user && !empty($request->email)) {
-                    $matched = \core_user::get_user_by_email($request->email, 'id,deleted', null, IGNORE_MISSING);
+                    $matched = \core_user::get_user_by_email($request->email, '*', null, IGNORE_MISSING);
                     if ($matched && empty($matched->deleted)) {
                         $user = $matched;
                         $request->userid = (int)$matched->id;
@@ -143,17 +148,15 @@ if (!empty($action) && !empty($id)) {
                             $newuser->firstname = $firstname;
                             $newuser->lastname = $lastname;
                             $newuser->email = $email;
-                            $newuser->password = generate_password(12);
+                            // IMPORTANT: Hash le mot de passe correctement
+                            $newuser->password = hash_internal_user_password($defaultpassword);
 
-                            $newuserid = user_create_user($newuser, true, true);
+                            $newuserid = user_create_user($newuser, false, false);
                             $user = \core_user::get_user($newuserid, '*', IGNORE_MISSING);
                             if ($user) {
                                 $request->userid = (int)$user->id;
                                 $DB->update_record('local_spacechildpages_enrolreq', $request);
-                                if (!empty($user->email) && validate_email($user->email)) {
-                                    $resetrecord = core_login_generate_password_reset($user);
-                                    send_password_change_confirmation_email($user, $resetrecord);
-                                }
+                                $usercreated = true;
                             }
                         } catch (Exception $e) {
                             $enrolerror = $e->getMessage();
@@ -192,8 +195,25 @@ if (!empty($action) && !empty($id)) {
                                     }
                                 }
 
-                                $plugin->enrol_user($manualinstance, $user->id, $roleid ?: null, time());
-                                $enrolmessage = get_string('enrolrequest:approved_enrolled', 'local_spacechildpages');
+                                // SOLUTION: Désactiver temporairement l'email de bienvenue
+                                $sendwelcome = $manualinstance->customint4 ?? 0;
+                                if ($sendwelcome) {
+                                    $manualinstance->customint4 = 0;
+                                    $DB->update_record('enrol', $manualinstance);
+                                }
+
+                                try {
+                                    $plugin->enrol_user($manualinstance, $user->id, $roleid ?: null, time());
+                                    $enrolmessage = get_string('enrolrequest:approved_enrolled', 'local_spacechildpages');
+                                } catch (Exception $e) {
+                                    $enrolerror = "Erreur lors de l'inscription: " . $e->getMessage();
+                                }
+
+                                // Restaurer le paramètre
+                                if ($sendwelcome) {
+                                    $manualinstance->customint4 = $sendwelcome;
+                                    $DB->update_record('enrol', $manualinstance);
+                                }
                             }
                         } else {
                             $enrolmessage = get_string('enrolrequest:approved_already', 'local_spacechildpages');
@@ -222,28 +242,55 @@ if (!empty($action) && !empty($id)) {
                 $DB->update_record('local_spacechildpages_enrolreq', $request);
                 $message = $enrolmessage !== '' ? $enrolmessage : $message;
 
+                // Email personnalisé
                 if ($user && !empty($user->email) && validate_email($user->email)) {
                     $sitename = format_string($SITE->shortname ?: $SITE->fullname);
-                    $coursename = $course ? format_string($course->fullname) : get_string('enrolrequest:nocourse', 'local_spacechildpages');
-                    $courseurl = $course
-                        ? (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false)
-                        : (new moodle_url('/course/index.php'))->out(false);
-
-                    $emaildata = (object) [
-                        'fullname' => format_string($request->fullname),
-                        'sitename' => $sitename,
-                        'course' => $coursename,
-                        'courseurl' => $courseurl,
-                        'loginurl' => (new moodle_url('/login/index.php'))->out(false),
-                        'forgoturl' => (new moodle_url('/login/forgot_password.php'))->out(false),
-                        'username' => $user->username,
-                        'email' => $user->email,
-                    ];
-
-                    $subject = get_string('enrolrequest:approved_subject', 'local_spacechildpages', $sitename);
-                    $body = get_string('enrolrequest:approved_body', 'local_spacechildpages', $emaildata);
+                    $coursename = $course ? format_string($course->fullname) : '-';
+                    $courseurl = $course ? (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false) : '#';
+                    $loginurl = (new moodle_url('/login/index.php'))->out(false);
                     $support = \core_user::get_support_user();
-                    email_to_user($user, $support, $subject, $body);
+                    
+                    $subject = "✅ Inscription approuvée - {$sitename}";
+                    $fullname = fullname($user);
+                    
+                    $body = "Bonjour {$fullname},
+
+Votre inscription a été approuvée !
+
+🔐 INFORMATIONS DE CONNEXION
+URL de connexion: {$loginurl}
+Username: {$user->username}
+Email: {$user->email}
+
+";
+                    if ($usercreated && $defaultpassword) {
+                        $body .= "⚠️ MOT DE PASSE PAR DÉFAUT
+Mot de passe: {$defaultpassword}
+
+🔒 IMPORTANT: Pour votre sécurité, veuillez changer votre mot de passe dès votre première connexion dans votre profil.
+
+";
+                    } else {
+                        $resetrecord = core_login_generate_password_reset($user);
+                        $reseturl = (new moodle_url('/login/set_password.php', ['token' => $resetrecord->token]))->out(false);
+                        $body .= "Connectez-vous avec votre mot de passe habituel.
+Mot de passe oublié ? {$reseturl}
+
+";
+                    }
+                    
+                    $body .= "📚 VOTRE COURS
+{$coursename}
+{$courseurl}
+
+Cordialement,
+L'équipe {$sitename}";
+
+                    try {
+                        email_to_user($user, $support, $subject, $body);
+                    } catch (Exception $e) {
+                        debugging("Email error: " . $e->getMessage());
+                    }
                 }
             } else {
                 $request->status = 'rejected';
