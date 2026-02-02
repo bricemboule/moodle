@@ -230,6 +230,35 @@
 
     let lastActive = null;
 
+    const bindIframeTopTarget = () => {
+      if (!iframe) return;
+
+      const applyTarget = () => {
+        try {
+          const doc = iframe.contentDocument;
+          if (!doc) return;
+
+          const body = doc.body;
+          const isLogin =
+            (body && body.classList.contains("path-login")) ||
+            !!doc.querySelector("form#login");
+
+          if (!isLogin) return;
+
+          doc.querySelectorAll("form").forEach((form) => {
+            if (form.dataset.scTopTarget === "1") return;
+            form.setAttribute("target", "_top");
+            form.dataset.scTopTarget = "1";
+          });
+        } catch (err) {
+          // Ignore cross-origin access errors.
+        }
+      };
+
+      iframe.addEventListener("load", applyTarget);
+      applyTarget();
+    };
+
     const open = (url, title) => {
       lastActive = document.activeElement;
       modal.classList.add("is-open");
@@ -249,6 +278,7 @@
         if (src && iframe.getAttribute("src") !== src) {
           iframe.setAttribute("src", src);
         }
+        bindIframeTopTarget();
       }
 
       const closeBtn = modal.querySelector(".sc-modal__close");
