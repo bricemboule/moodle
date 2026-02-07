@@ -17,4 +17,9 @@ if ($hassiteconfig) {
         get_string('enrolrequests', 'local_spacechildpages'),
         new moodle_url('/local/spacechildpages/enrol_requests.php')
     ));
+    $ADMIN->add('localplugins', new admin_externalpage(
+        'local_spacechildpages_progress',
+        get_string('progress:dashboard', 'local_spacechildpages'),
+        new moodle_url('/local/spacechildpages/progress_dashboard.php')
+    ));
 }

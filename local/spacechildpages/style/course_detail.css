@@ -1,0 +1,86 @@
+.sc-course-detail .sc-course-detail__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--sc-spacing-3xl);
+  align-items: start;
+}
+
+.sc-course-detail .sc-section:first-of-type {
+  padding-top: var(--sc-spacing-2xl);
+}
+
+.sc-course-detail.sc-landing.has-topstrip .sc-section:first-of-type {
+  padding-top: calc(
+    var(--sc-topbar-height, 48px) + var(--sc-nav-height, 72px) +
+      var(--sc-spacing-2xl)
+  );
+}
+
+.sc-course-detail .sc-course-detail__media {
+  border-radius: var(--sc-radius-lg);
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--sc-shadow-soft);
+}
+
+.sc-course-detail .sc-course-detail__media img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.sc-course-detail .sc-course-detail__title {
+  margin: var(--sc-spacing-md) 0 var(--sc-spacing-lg);
+}
+
+.sc-course-detail .sc-course-detail__summary {
+  color: var(--sc-text-light);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: var(--sc-spacing-xl);
+}
+
+.sc-course-detail .sc-course-detail__meta {
+  display: grid;
+  gap: var(--sc-spacing-sm);
+  margin-bottom: var(--sc-spacing-xl);
+  color: var(--sc-text);
+  font-size: 0.98rem;
+}
+
+.sc-course-detail .sc-course-detail__meta-row {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--sc-shadow-soft);
+}
+
+.sc-course-detail .sc-course-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-spacing-md);
+}
+
+@media (max-width: 980px) {
+  .sc-course-detail .sc-course-detail__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-course-detail.sc-landing.has-topstrip .sc-section:first-of-type {
+    padding-top: var(--sc-spacing-2xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .sc-course-detail .sc-course-detail__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-course-detail .sc-course-detail__actions .sc-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

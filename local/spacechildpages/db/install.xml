@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/spacechildpages/db" VERSION="2026011100" COMMENT="XMLDB file for local_spacechildpages">
+<XMLDB PATH="local/spacechildpages/db" VERSION="2026020700" COMMENT="XMLDB file for local_spacechildpages">
   <TABLES>
     <TABLE NAME="local_spacechildpages_mcategories" COMMENT="Marketing categories">
       <FIELDS>
@@ -48,6 +48,66 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
+    </TABLE>
+    <TABLE NAME="local_spacechildpages_completions" COMMENT="Tracks course completions with notifications">
+        <FIELDS>
+              <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+              <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User who completed the course"/>
+              <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course that was completed"/>
+              <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Timestamp of completion"/>
+              <FIELD NAME="grade" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false" DECIMALS="2" COMMENT="Final grade percentage"/>
+              <FIELD NAME="notified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Timestamp when notification was sent"/>
+              <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+              <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+              <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+        </KEYS>
+        <INDEXES>
+              <INDEX NAME="timecompleted" UNIQUE="false" FIELDS="timecompleted"/>
+              <INDEX NAME="user_course" UNIQUE="true" FIELDS="userid,courseid" COMMENT="One completion record per user per course"/>
+        </INDEXES>
+    </TABLE>
+<!--  NOUVELLE TABLE : Suivi des jalons de progression  -->
+    <TABLE NAME="local_spacechildpages_progress" COMMENT="Tracks progress milestones (25%, 50%, 75%)">
+        <FIELDS>
+              <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+              <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+              <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+              <FIELD NAME="milestone" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false" COMMENT="Progress percentage: 25, 50, or 75"/>
+              <FIELD NAME="timenotified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="When notification was sent"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+              <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+              <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+        </KEYS>
+        <INDEXES>
+              <INDEX NAME="user_course_milestone" UNIQUE="true" FIELDS="userid,courseid,milestone" COMMENT="One notification per milestone per user per course"/>
+        </INDEXES>
+    </TABLE>
+    <!--  NOUVELLE TABLE : Notifications de retard  -->
+    <TABLE NAME="local_spacechildpages_delays" COMMENT="Course delay notifications log">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Student who received notification"/>
+            <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course where delay was detected"/>
+            <FIELD NAME="reason" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="Delay reason: inactive, never_accessed, low_progress, overdue_activities"/>
+            <FIELD NAME="days_inactive" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Days without accessing the course"/>
+            <FIELD NAME="progress" TYPE="number" LENGTH="5" NOTNULL="false" SEQUENCE="false" DECIMALS="2" COMMENT="Current progress percentage"/>
+            <FIELD NAME="timenotified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="When notification was sent"/>
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+        </KEYS>
+        <INDEXES>
+            <INDEX NAME="timenotified" UNIQUE="false" FIELDS="timenotified"/>
+            <INDEX NAME="user_course" UNIQUE="false" FIELDS="userid,courseid" COMMENT="Quick lookup for recent notifications"/>
+            <INDEX NAME="reason" UNIQUE="false" FIELDS="reason" COMMENT="Filter by delay type"/>
+        </INDEXES>
     </TABLE>
   </TABLES>
 </XMLDB>

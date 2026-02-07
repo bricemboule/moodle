@@ -210,15 +210,17 @@
       </div>
       <div class="sc-grid sc-grid--courses sc-stagger">
         {{#courses}}
-          <article class="sc-card">
-            {{#image}}
-              <div class="sc-card-media">
-                <img src="{{{image}}}" alt="{{title}}" loading="lazy">
-              </div>
-            {{/image}}
-            <span class="sc-card-tag">Formation</span>
-            <h3>{{title}}</h3>
-            <p>{{summary}}</p>
+          <article class="sc-card sc-card--course">
+            <a class="sc-card-link" href="{{{url}}}">
+              {{#image}}
+                <div class="sc-card-media">
+                  <img src="{{{image}}}" alt="{{title}}" loading="lazy">
+                </div>
+              {{/image}}
+              <span class="sc-card-tag">Formation</span>
+              <h3>{{title}}</h3>
+              <p>{{summary}}</p>
+            </a>
             {{#canrequest}}
               <a class="sc-link" href="{{{enrolurl}}}" data-signup-modal>S'inscrire →</a>
             {{/canrequest}}

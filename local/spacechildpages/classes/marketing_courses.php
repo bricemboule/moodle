@@ -58,7 +58,7 @@ class marketing_courses {
                 'title' => format_string($course->fullname),
                 'summary' => $summary,
                 'image' => $image,
-                'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
+                'url' => (new moodle_url('/local/spacechildpages/course_detail.php', ['courseid' => $course->id]))->out(false),
                 'enrolurl' => (new moodle_url('/local/spacechildpages/enrol_request.php', ['courseid' => $course->id]))->out(false),
                 'canrequest' => $canrequest,
             ];
